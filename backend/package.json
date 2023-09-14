@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "strat": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "mongoose": "^7.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
