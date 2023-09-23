@@ -1,0 +1,78 @@
+#heading{
+    text-align: center;
+    border-bottom: solid;
+}
+
+#month-heading{
+    margin-left: 1%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+table {
+    margin-left: 10%;
+    border-spacing: 0;
+}
+
+tbody tr:first-child td:first-child {
+    border-top-left-radius: 34px;
+}
+
+tbody tr:first-child td:last-child {
+    border-top-right-radius: 34px;
+}
+
+tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 34px;
+}
+
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 34px;
+}
+
+thead tr td{
+    text-align: center;
+    font-size: 19px;
+}
+
+td{
+    width: 98px;
+}
+
+thead tr{
+    height: 10px; 
+}
+
+tbody{
+    border: 2px solid black;
+    border-top-left-radius: 50px;
+    
+}
+
+tbody tr td{
+    border: 1px solid;
+    height: 98px;
+    padding-bottom: 10%;
+    padding-left: 1.5%
+}
+
+#left-arrow, #right-arrow{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    position: relative;
+    bottom: 5px;
+    background-color: rgb(142, 142, 142);
+    border: 2px solid rgb(116, 116, 116);
+    border-radius: 5px;
+}
+
+#left-arrow{
+    margin-left: 50px;
+}
+
+#right-arrow{
+    margin-left: 3px;
+}
