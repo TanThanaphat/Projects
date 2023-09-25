@@ -9,6 +9,15 @@ let months = ["January", "February", "March", "April", "May", "June",
 let m = -1;
 let year = 2566;
 
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
+function verified() {
+    var sucess = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
     const length = TableBody.children.length
     for (let i = 0; i < length; i++)
