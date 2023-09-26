@@ -119,3 +119,4 @@ rightArrow.addEventListener("click", () => {
 })
 
 ChangeMonth(1)
+
