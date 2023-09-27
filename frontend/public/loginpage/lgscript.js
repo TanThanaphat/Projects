@@ -9,5 +9,6 @@ async function signin(){
   let Password = document.querySelector("#Password").value
   
   let idbox = await Login(Username,Password);
-  console.log(idbox);
+  console.log(idbox); 
+  console.log(idbox._id);
 }
