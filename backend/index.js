@@ -1,6 +1,9 @@
+const cors = require('cors')
+
 //module หรือ pacgace ที่ต้องติดตั้ง npm i ชื่อ
 const express = require('express');
 const path = require('path');
+
 
 
 //module ที่สร้างเอง
@@ -9,6 +12,7 @@ const logger = require('./middleware/logger');
 
 const app = express();
 //body parse middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 app.use('/api/users', require('./routes/api/users'));
