@@ -174,3 +174,11 @@ TodoListAdd_Button.addEventListener("click", () => {
         })
     }
 })
+
+const LoginButton = document.querySelector(".submit");
+
+LoginButton.addEventListener('click', () => {
+    console.log("hi");
+    let s = fetch(`http://localhost:5000/api/users/login`,)
+    console.log(s.status)
+});
