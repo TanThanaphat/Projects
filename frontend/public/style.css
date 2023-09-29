@@ -13,7 +13,7 @@ display: flex;
 box-sizing: border-box;
 }
 .col-2{
-background-color: #6421917b;
+background-color: --dark-;
 width: 30%;
 
 }
