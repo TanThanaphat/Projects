@@ -59,7 +59,7 @@ body {
   background-color: var(--bg-main);
 }
 .col-2{
-background-color: --dark-;
+background-color: var(--bg-main);
 width: 30%;
 
 }
@@ -71,9 +71,10 @@ margin: auto;
 }
 .top{
 text-align: center;
-background-color: #d3e2f0;
+background-color: var(--bg-main);
 margin: 0%;
 font-size: 200%;
+color: var(--color-txt);
 
 }
 
@@ -160,9 +161,10 @@ body{
   /* background-color:rgb(182, 182, 182); */
 }
 .login{
-  background-color:rgb(175, 175, 175);
+  background-color: var(--bg-main);
   padding: 6px;
   border-radius: 20%;
+  color: var(--color-txt);
 }
 .navbar .popup {
   position: left;
@@ -286,6 +288,7 @@ font-size: 22px;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+color: var(--color-txt);
 }
 
 /* Hide the browser's default checkbox */
@@ -304,17 +307,17 @@ top: 0;
 left: 0;
 height: 25px;
 width: 25px;
-background-color: #eee;
+background-color: var(--color-hover);
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-background-color: #ccc;
+background-color: var(--bg-second);
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-background-color: #2196F3;
+background-color: var(--color-txt);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -335,7 +338,7 @@ left: 9px;
 top: 5px;
 width: 5px;
 height: 10px;
-border: solid white;
+border: solid var(--bg-main);
 border-width: 0 3px 3px 0;
 -webkit-transform: rotate(45deg);
 -ms-transform: rotate(45deg);
