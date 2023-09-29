@@ -120,3 +120,57 @@ rightArrow.addEventListener("click", () => {
 
 ChangeMonth(1)
 
+let Task_AddingDebounce = false
+let TodoList_Div = document.querySelector(".List")
+let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
+
+TodoListAdd_Button.addEventListener("click", () => {
+    if (Task_AddingDebounce == false){
+        Task_AddingDebounce = true;
+
+        TodoListAdd_Button.style = "display: none"
+
+        let AddButton = document.createElement("button")
+        AddButton.innerText = "Add"
+        document.querySelector("#todo-listAddButton").parentElement.appendChild(AddButton)
+
+        let TaskName_Input = document.createElement("input")
+        
+        TaskName_Input.placeholder = "Enter your task"
+        TaskName_Input.id = "#TaskName-Input"
+        TodoList_Div.appendChild(TaskName_Input)
+
+        let CancelButton = document.createElement("button")
+        CancelButton.innerText = "Cancel"
+        CancelButton.style = "margin-left: 2%"
+        document.querySelector("#todo-listAddButton").parentElement.appendChild(CancelButton)
+        
+        function reset(){
+            AddButton.remove()
+            CancelButton.remove()
+            TaskName_Input.remove()
+            TodoListAdd_Button.style.display = null;
+            Task_AddingDebounce = false
+        }
+        CancelButton.addEventListener("click", () => {
+            reset()
+        })
+
+        AddButton.addEventListener("click", () => {
+            let newLabel = document.createElement("label")
+            newLabel.className = "container"
+            newLabel.innerText = TaskName_Input.value
+
+            let InputCheckBox = document.createElement("input")
+            InputCheckBox.type = "checkbox"
+            let InputSpan = document.createElement("span")
+            InputSpan.className = "checkmark"
+
+            newLabel.appendChild(InputCheckBox)
+            newLabel.appendChild(InputSpan)
+
+            TodoList_Div.appendChild(newLabel)
+            reset()
+        })
+    }
+})
