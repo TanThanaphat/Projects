@@ -183,8 +183,7 @@ LoginButton.addEventListener('click', () => {
     let Password = document.querySelector(".password > input").value
     data = {userName: Username, password: Password}
     console.log(Username, Password);
-    id_user = Login(Username, Password);
-    console.log(id_user);
+    Login(Username, Password);
 });
 
 async function Login(Username, Password) {
@@ -199,7 +198,9 @@ async function Login(Username, Password) {
         },
         body: JSON.stringify(body),
       });
-    return s.json();
+    const data = await s.json();
+    id_user = data._id;
+    console.log(id_user);
 }
 
 async function createitem() {
