@@ -177,13 +177,14 @@ TodoListAdd_Button.addEventListener("click", () => {
 
 const LoginButton = document.querySelector(".submit");
 
+let id_user;
 LoginButton.addEventListener('click', () => {
     let Username = document.querySelector(".username > input").value
     let Password = document.querySelector(".password > input").value
     data = {userName: Username, password: Password}
     console.log(Username, Password);
-    let id = Login(Username, Password);
-    console.log(id);
+    id_user = Login(Username, Password);
+    console.log(id_user);
 });
 
 async function Login(Username, Password) {
@@ -206,7 +207,7 @@ async function createitem() {
     "day": 21,
     "month":7,
     "year":2566,
-    "id_user":"64fe94545920f7fa3f9fdbe6",
+    "id_user":id_user,
     "todo":["กินมาม่า",
             "ทำการบ้าน",
             "อ่านหนังสือ"]
@@ -221,17 +222,13 @@ async function createitem() {
     return ;
  }
 
-async function createitem() {
+async function createuser() {
     const body = {
-    "day": 21,
-    "month":7,
-    "year":2566,
-    "id_user":"64fe94545920f7fa3f9fdbe6",
-    "todo":["กินมาม่า",
-            "ทำการบ้าน",
-            "อ่านหนังสือ"]
+    "name": "nameadwa",
+    "userName": "saysar",
+    "password": "1234"
     };
-    await fetch('http://localhost:5000/api/items/creact', {
+    await fetch('http://localhost:5000/api/users/creact', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -239,4 +236,55 @@ async function createitem() {
         body: JSON.stringify(body),
       });
     return ;
+ }
+
+ async function update_item() {
+    const body = {
+        "todo":["หาไรกัน",
+        "ทำไรกัน",
+        "ไม่อ่านหนังสือหรอ",
+        "546546"
+        ]
+    };
+    await fetch(`http://localhost:5000/api/items/put/${id_user}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    return ;
+ }
+
+ async function delete_item() {
+    await fetch(`http://localhost:5000/api/items/put/${idbox}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    return ;
+ }
+
+ async function gettodolist() {
+    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}/${10}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    return todolists.json();
+ }
+
+ async function getmounthbox() {
+    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    return monthitembox.json();
  }
