@@ -15,7 +15,7 @@ router.put('/put/:id',async (req, res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err.message});
+    return res.status(500).json({"error":err.message});
   }
 })
 
@@ -30,8 +30,9 @@ router.post('/login',async (req, res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err});
+    return res.status(500).json({"error":err});
   }
+  return res.status(500).json({"error":"error"});
 });
 
 
@@ -45,7 +46,7 @@ router.post('/creact',async (req,res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err});
+    return res.status(500).json({"error":err});
   }
     
 });
@@ -59,7 +60,7 @@ router.delete('/delete/:id',async (req,res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err});
+    return res.status(500).json({"error":err});
   }
     
 });

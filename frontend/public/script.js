@@ -183,7 +183,10 @@ LoginButton.addEventListener('click', () => {
     let Password = document.querySelector(".password > input").value
     data = {userName: Username, password: Password}
     console.log(Username, Password);
-    Login(Username, Password);
+    Login(Username, Password)
+        .then(function(result){
+            console.log(result)
+        })
 });
 
 async function Login(Username, Password) {
@@ -191,16 +194,18 @@ async function Login(Username, Password) {
         "userName":Username,
         "password":Password
     };
-    let s = await fetch('http://localhost:5000/api/users/login', {
+
+    let result = await fetch('http://localhost:5000/api/users/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
-      });
-    const data = await s.json();
-    id_user = data._id;
-    console.log(id_user);
+    })
+        .then(res => res.json())
+        .then(data => { return data });
+    
+    return result;
 }
 
 async function createitem() {

@@ -13,7 +13,7 @@ router.get('/get/:id_user/:month/:limit',async (req, res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err.message});
+    return res.status(500).json({"error":err.message});
   }
 });
 
@@ -27,7 +27,7 @@ router.get('/get/:id_user/:month',async (req, res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err.message});
+    return res.status(500).json({"error":err.message});
   }
 });
 
@@ -45,7 +45,7 @@ router.put('/put/:id',async (req, res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"eroor":err.message});
+    return res.status(500).json({"error":err.message});
   }
 })
 
@@ -58,7 +58,7 @@ router.post('/creact',async (req,res) => {
      catch(err)
      {
        console.log(err);
-       return res.status(500).json({"eroor":err});
+       return res.status(500).json({"error":err});
      }
   });
   router.delete('/delete/:id',async (req,res) => {
@@ -70,7 +70,7 @@ router.post('/creact',async (req,res) => {
     catch(err)
     {
       console.log(err);
-      return res.status(500).json({"eroor":err});
+      return res.status(500).json({"error":err});
     }
       
   });
