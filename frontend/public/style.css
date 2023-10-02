@@ -1,33 +1,80 @@
+:root {
+  --dark-body: #4d4c5a;
+  --dark-main: #141529;
+  --dark-second: #79788c;
+  --dark-hover: #323048;
+  --dark-text: #f8fbff;
+
+  --light-body: #f3f8fe;
+  --light-main: #fdfdfd;
+  --light-second: #c3c2c8;
+  --light-hover: #edf0f5;
+  --light-text: #151426;
+
+  --blue: #0000ff;
+  --white: #fff;
+
+  --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  --font-family: Poppin , sans-serif;
+}
+
+html,
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-body);
+}
+
+.dark {
+  --bg-body: var(--dark-body);
+  --bg-main: var(--dark-main);
+  --bg-second: var(--dark-second);
+  --color-hover: var(--dark-hover);
+  --color-txt: var(--dark-text);
+}
+
+.light {
+  --bg-body: var(--light-body);
+  --bg-main: var(--light-main);
+  --bg-second: var(--light-second);
+  --color-hover: var(--light-hover);
+  --color-txt: var(--light-text);
+}
+
 #heading{
   text-align: center;
   border-bottom: solid;
+  color: var(--color-txt);
 }
 
 #month-heading{
   margin-left: 1%;
   font-size: 30px;
   font-weight: bold;
+  color: var(--color-txt);
 }
 .wrapper{
-display: flex;
-box-sizing: border-box;
+  display: flex;
+  box-sizing: border-box;
+  background-color: var(--bg-main);
 }
 .col-2{
-background-color: #6421917b;
+background-color: var(--bg-main);
 width: 30%;
 
 }
 .col-1{
-background-color: aquamarine;
+background-color: var(--bg-main);
 width: 70%;
 height: auto;
 margin: auto;
 }
 .top{
 text-align: center;
-background-color: #d3e2f0;
+background-color: var(--bg-main);
 margin: 0%;
 font-size: 200%;
+color: var(--color-txt);
 
 }
 
@@ -114,9 +161,10 @@ body{
   /* background-color:rgb(182, 182, 182); */
 }
 .login{
-  background-color:rgb(175, 175, 175);
+  background-color: var(--bg-main);
   padding: 6px;
   border-radius: 20%;
+  color: var(--color-txt);
 }
 .navbar .popup {
   position: left;
@@ -240,6 +288,7 @@ font-size: 22px;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+color: var(--color-txt);
 }
 
 /* Hide the browser's default checkbox */
@@ -258,17 +307,17 @@ top: 0;
 left: 0;
 height: 25px;
 width: 25px;
-background-color: #eee;
+background-color: var(--color-hover);
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-background-color: #ccc;
+background-color: var(--bg-second);
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-background-color: #2196F3;
+background-color: var(--color-txt);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -289,7 +338,7 @@ left: 9px;
 top: 5px;
 width: 5px;
 height: 10px;
-border: solid white;
+border: solid var(--bg-main);
 border-width: 0 3px 3px 0;
 -webkit-transform: rotate(45deg);
 -ms-transform: rotate(45deg);
