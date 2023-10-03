@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <h2>Calendar</h2>
+
+    <button class="open-button" onclick="openForm()">Login</button>
+
+    <tbody>
+        <div class="form-popup" id="myForm">
+            <form class="form-container">
+                <div style="border-right-style:groove;" class="left-side">
+                        <h1 style="text-align: center;">Login</h1>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>
+                        <button style="border-radius: 10px;" type="submit" class="btn">Login</button>
+                        <button style="border-radius: 10px;" type="button" class="btn cancel" onclick="closeForm()">Guest</button>
+                        <p class = "signin"onclick="showpic()">Sign in</p>
+                </div>
+                <div class="right-side"> 
+                        <img src="pan.jpg" id="pan" onclick="closepic()">
+                        <img src="logo.png" class="logo">
+                </div>
+            </form>
+            
+        </div>
+
+    </tbody>
+
+    <script src="script.js"></script>
+    
+
+</body>
+</html>

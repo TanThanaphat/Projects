@@ -8,24 +8,30 @@
     <body class="dark">
         <nav style="text-align: center" class="navbar">
             <h1 id="heading" style="font-size: 30;">Planner</h1>
-            <div class="popup" onclick="myFunction()"><span class="login">login</span></div>
+            <button class="open-button" onclick="openForm()">Login</button>
         </nav>
-        <div class="pop">
-            <div class="popuptext" id="myPopup">
-                <h2 style="font-weight: bold; margin-top: 30px ">LOGIN</h2>
-                <div class="username">
-                    <p id="user">Username</p>
-                    <i class="glyphicon glyphicon-user"></i>
-                    <input type="text" class="intext">
-                </div>
-                <div class="password">
-                    <p id="pass">Password</p>
-                    <i class="glyphicon glyphicon-lock"></i>
-                    <input type="password" class="intext">
-                </div>
-                <button class="submit">Login</button>
+        
+            <div class="form-popup" id="myForm">
+                <form class="form-container">
+                    <div style="border-right-style:groove;" class="left-side">
+                            <h1 style="text-align: center;">Login</h1>
+                            <label for="email"><b>Email</b></label>
+                            <input type="text" placeholder="Enter Email" name="email" required>
+    
+                            <label for="psw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="psw" required>
+                            <button style="border-radius: 10px;" type="submit" class="btn">Login</button>
+                            <button style="border-radius: 10px;" type="button" class="btn cancel" onclick="closeForm()">Guest</button>
+                            <p class = "signin"onclick="showpic()">Sign in</p>
+                    </div>
+                    <div class="right-side"> 
+                            <img src="login/pan.jpg" id="pan" onclick="closepic()">
+                            <img src="login/logo.png" class="logo">
+                    </div>
+                </form>
+                
             </div>
-        </div>
+    
         <div class="wrapper">
     
                 <div class="col-1">
