@@ -184,7 +184,16 @@ LoginButton.addEventListener('click', () => {
     data = {userName: Username, password: Password}
     console.log(Username, Password);
     id_user = Login(Username, Password);
-    console.log(id_user);
+    Login(Username, Password)
+        .then(function(result){
+            for (var key in result) {
+                if (result.hasOwnProperty(key)) {
+                console.log(result[key])
+                  break;
+                }
+            }
+        })
+    
 });
 
 async function Login(Username, Password) {

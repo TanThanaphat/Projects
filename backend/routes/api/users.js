@@ -32,7 +32,7 @@ router.post('/login',async (req, res) => {
     console.log(err);
     return res.status(500).json({"error":err});
   }
-  return res.status(500).json({"error":"error"});
+  return res.status(500).json({"error":{}});
 });
 
 
