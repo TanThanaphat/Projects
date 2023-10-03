@@ -183,10 +183,8 @@ LoginButton.addEventListener('click', () => {
     let Password = document.querySelector(".password > input").value
     data = {userName: Username, password: Password}
     console.log(Username, Password);
-    Login(Username, Password)
-        .then(function(result){
-            console.log(result)
-        })
+    id_user = Login(Username, Password);
+    console.log(id_user);
 });
 
 async function Login(Username, Password) {
@@ -194,18 +192,14 @@ async function Login(Username, Password) {
         "userName":Username,
         "password":Password
     };
-
-    let result = await fetch('http://localhost:5000/api/users/login', {
+    let s = await fetch('http://localhost:5000/api/users/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
-    })
-        .then(res => res.json())
-        .then(data => { return data });
-    
-    return result;
+      });
+    return await s.json();
 }
 
 async function createitem() {
@@ -252,7 +246,7 @@ async function createuser() {
         "546546"
         ]
     };
-    await fetch(`http://localhost:5000/api/items/put/${id_user}`, {
+    await fetch(`http://localhost:5000/api/items/put/${id_user._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -274,7 +268,7 @@ async function createuser() {
  }
 
  async function gettodolist() {
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}/${10}`, {
+    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user._id}/${month}/${10}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -285,7 +279,7 @@ async function createuser() {
  }
 
  async function getmounthbox() {
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}`, {
+    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user._id}/${month}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
