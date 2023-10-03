@@ -188,8 +188,8 @@ LoginButton.addEventListener('click', () => {
         .then(function(result){
             for (var key in result) {
                 if (result.hasOwnProperty(key)) {
-                console.log(result[key])
-                  break;
+                    console.log(result[key])
+                    break;
                 }
             }
         })
