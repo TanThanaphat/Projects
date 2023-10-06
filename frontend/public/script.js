@@ -293,7 +293,7 @@ async function createuser() {
  }
 
  async function gettodolist(month) {
-    let a = 2;
+    let a = 10;
     let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}/${a}`, {
         method: "GET",
         headers: {
