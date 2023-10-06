@@ -183,11 +183,15 @@ let LoginPopup = document.querySelector("#myPopup")
 const LoginButton = document.querySelector(".submit");
 
 let id_user = null;
+let currentMonth_UserData;
 
-function AfterLogin(){
+function LoadCurrentMonth_UserData(){
     if (id_user != null){
-        const user_Data = gettodolist(CurrentMonth);
-        console.log(user_Data)
+        gettodolist(CurrentMonth)
+            .then(function(result){
+                currentMonth_UserData = result.itemformIDsort
+                console.log(currentMonth_UserData);
+            })
     }
 }
 
@@ -202,8 +206,8 @@ LoginButton.addEventListener('click', () => {
             if (key != "error"){
                 id_user = result[key]
                 console.log(id_user)
-                LoginPopup.className = "popuptext" /* change to class that is toggle off the login Popup */
-                AfterLogin()
+                LoginPopup.className = "popuptext" /* change to class that is toggle off the login Popup or remove login page (This is after login) */
+                LoadCurrentMonth_UserData()
             } else {
                 /* Incorrect Username/Password */
             }
