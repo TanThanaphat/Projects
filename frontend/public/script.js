@@ -46,7 +46,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
             
             if (currentDayOrder == FirstDay) isstart = true;
             if (daycount < days && isstart == true){
-                TableRow.children[j].style.backgroundColor = "rgb(217, 217, 217)"
+                //TableRow.children[j].style.backgroundColor = "rgb(217, 217, 217)"
                 TableRow.children[j].innerText = ++n;
                 daycount++;
             } else {

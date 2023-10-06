@@ -1,5 +1,6 @@
 :root {
-  --dark-body: #4d4c5a;
+  /*--dark-body: #4d4c5a;*/
+  --dark-body: #25263a;
   --dark-main: #141529;
   --dark-second: #79788c;
   --dark-hover: #323048;
@@ -11,18 +12,18 @@
   --light-hover: #edf0f5;
   --light-text: #151426;
 
+  --color-body: #FFFFFF;
+  --color-main: #F4F7FF;
+  --color-second: #c3c2c8;
+  --color-hover: #0068FF;
+  --color-text: #000000;
+
   --blue: #0000ff;
   --white: #fff;
 
   --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   --font-family: Poppin , sans-serif;
-}
-
-html,
-body {
-    font-family: var(--font-family);
-    background-color: var(--bg-body);
 }
 
 .dark {
@@ -41,14 +42,38 @@ body {
   --color-txt: var(--light-text);
 }
 
+.color {
+  --bg-body: var(--color-body);
+  --bg-main: var(--color-main);
+  --bg-second: var(--color-second);
+  --color-hover: var(--color-hover);
+  --color-txt: var(--color-text);
+}
+
+html,
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-body);
+    color: var(--color-txt);
+}
+
+
+
+
+
 #heading{
   text-align: center;
   border-bottom: solid;
   color: var(--color-txt);
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+.light table{
+  box-shadow: var(--shadow);
 }
 
 #month-heading{
-  margin-left: 1%;
   font-size: 30px;
   font-weight: bold;
   color: var(--color-txt);
@@ -56,52 +81,58 @@ body {
 .wrapper{
   display: flex;
   box-sizing: border-box;
-  background-color: var(--bg-main);
+  background-color: var(--bg-body);
 }
 .col-2{
-background-color: #6421917b;
-width: 30%;
-
-}
-.col-1{
 background-color: var(--bg-main);
-width: 70%;
+width: 45%;
+}
+
+.col-1{
+width: 55%;
+align-items: center;
 height: auto;
 margin: auto;
 }
 .top{
 text-align: center;
-background-color: #d3e2f0;
+background-color: var(--bg-main);
 margin: 0%;
 font-size: 200%;
-
+color: var(--color-txt);
+padding-top: 20px;
+padding-bottom: 20px;
 }
 
-p
-{
-margin: 0;
+p{
+  margin: 0;
 }
+
+.List {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 table {
-
   border-spacing: 0;
-  
-
+  background-color: var(--bg-main);
+  border-radius: 30px;
 }
 
-tbody tr:first-child td:first-child {
-  border-top-left-radius: 34px;
+/*tbody tr:first-child td:first-child {
+  border-top-left-radius: 25px;
 }
 
 tbody tr:first-child td:last-child {
-  border-top-right-radius: 34px;
-}
+  border-top-right-radius: 25px;
+}*/
 
 tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 34px;
+  border-bottom-left-radius: 30px;
 }
 
 tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 34px;
+  border-bottom-right-radius: 30px;
 }
 
 thead tr td{
@@ -109,8 +140,20 @@ thead tr td{
   font-size: 19px;
 }
 
+thead tr .months{
+  padding-top: 30px;
+  padding-bottom: 10px;
+  font-size: 40px;
+}
+
+thead tr .days{
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
 td{
   width: 98px;
+  text-align: center;
 }
 
 thead tr{
@@ -118,52 +161,71 @@ thead tr{
 }
 
 tbody{
-  border: 2px solid black;
+  border: none;
   border-top-left-radius: 50px;
-  
 }
 
 tbody tr td{
-  border: 1px solid;
+  border: none;
   height: 98px;
   padding-bottom: 10%;
   padding-left: 1.5%
 }
 
+table{
+  background-color: var(--bg-main);
+}
+
+
 #left-arrow, #right-arrow{
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: var(--white);
   font-weight: bold;
   position: relative;
   bottom: 5px;
-  background-color: rgb(142, 142, 142);
-  border: 2px solid rgb(116, 116, 116);
-  border-radius: 5px;
+  border-radius: 50%;
+  font-size: 15px;
+  color: var(--color-txt);
+  background-color: var(--bg-main);
 }
 
 #left-arrow{
-  margin-left: 50px;
+  margin-right: 5px;
+}
+
+#left-arrow:hover{
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 #right-arrow{
-  margin-left: 3px;
+  margin-left: 5px;
 }
 
-body{
-  font-family: 'Bai Jamjuree', sans-serif;
+#right-arrow:hover{
+  background-color: var(--blue);
+  color: var(--white);
 }
+
+.days {
+  color: var(--bg-second);
+  font-weight: 600;
+}
+
 .navbar {
   padding: 10px;
   display :inline
   /* background-color:rgb(182, 182, 182); */
 }
 .login{
-  background-color:rgb(175, 175, 175);
-  padding: 6px;
-  border-radius: 20%;
+  color: var(--white);
+  background-color: var(--blue);
+  padding: 15px;
+  border-radius: 40%;
 }
+
 .navbar .popup {
   position: left;
   text-align: right;
@@ -185,9 +247,9 @@ body{
   visibility: hidden;
   width: 340px;
   background-color: #688ebe;
-  color: #fff;
+  color: var(--color-txt);
   text-align: center;
-  border-radius: 6px;
+  border-radius: 30px;
   position: absolute;
   z-index: 1;
   margin-top : 90px;
@@ -286,6 +348,7 @@ font-size: 22px;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+color: var(--color-txt);
 }
 
 /* Hide the browser's default checkbox */
@@ -304,17 +367,18 @@ top: 0;
 left: 0;
 height: 25px;
 width: 25px;
-background-color: #eee;
+background-color: var(--color-hover);
+border-radius: 8px;
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-background-color: #ccc;
+background-color: var(--bg-second);
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-background-color: #2196F3;
+background-color: var(--color-txt);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -335,7 +399,7 @@ left: 9px;
 top: 5px;
 width: 5px;
 height: 10px;
-border: solid white;
+border: solid var(--bg-main);
 border-width: 0 3px 3px 0;
 -webkit-transform: rotate(45deg);
 -ms-transform: rotate(45deg);
