@@ -305,6 +305,7 @@ async function createuser() {
 
  async function getmounthbox(month) {
     let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}`, {
+    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
