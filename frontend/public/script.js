@@ -9,6 +9,8 @@ let months = ["January", "February", "March", "April", "May", "June",
 let m = -1;
 let year = 2566;
 
+let CurrentMonth;
+
 function myFunction() {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
@@ -97,6 +99,7 @@ function ChangeMonth(status){
     monthHeading.innerHTML = months[m] + " " + year
 
     let realmonth = m + 1;
+    CurrentMonth = realmonth;
     let christyear = year - 543;
     let days = getDaysAmount(realmonth, christyear);
 
@@ -175,9 +178,19 @@ TodoListAdd_Button.addEventListener("click", () => {
     }
 })
 
+let LoginPopup = document.querySelector("#myPopup")
+
 const LoginButton = document.querySelector(".submit");
 
-let id_user;
+let id_user = null;
+
+function AfterLogin(){
+    if (id_user != null){
+        const user_Data = gettodolist(CurrentMonth);
+        console.log(user_Data)
+    }
+}
+
 LoginButton.addEventListener('click', () => {
     let Username = document.querySelector(".username > input").value
     let Password = document.querySelector(".password > input").value
@@ -186,10 +199,15 @@ LoginButton.addEventListener('click', () => {
     id_user = Login(Username, Password)
     .then(function(result){
         for (var key in result) {
-            if (result.hasOwnProperty(key)) {
-                console.log(result[key])
-                break;
+            if (key != "error"){
+                id_user = result[key]
+                console.log(id_user)
+                LoginPopup.className = "popuptext" /* change to class that is toggle off the login Popup */
+                AfterLogin()
+            } else {
+                /* Incorrect Username/Password */
             }
+            break;
         }
     })
 });
@@ -253,7 +271,7 @@ async function createuser() {
         "546546"
         ]
     };
-    await fetch(`http://localhost:5000/api/items/put/${id_user._id}`, {
+    await fetch(`http://localhost:5000/api/items/put/${id_user}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -274,24 +292,23 @@ async function createuser() {
     return ;
  }
 
- async function gettodolist() {
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user._id}/${month}/${10}`, {
+ async function gettodolist(month) {
+    let a = 2;
+    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}/${a}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
+        }
       });
-    return todolists.json();
+    return todolist.json();
  }
 
- async function getmounthbox() {
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user._id}/${month}`, {
+ async function getmounthbox(month) {
+    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
+        }
       });
     return monthitembox.json();
  }
