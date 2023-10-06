@@ -293,8 +293,8 @@ async function createuser() {
  }
 
  async function gettodolist(month) {
-    let a = 2;
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}/${a}`, {
+    let a = 10;
+    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${a}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -304,7 +304,7 @@ async function createuser() {
  }
 
  async function getmounthbox(month) {
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}`, {
+    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
