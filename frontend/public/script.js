@@ -294,12 +294,8 @@ async function createuser() {
 
  async function gettodolist(month) {
     let a = 10;
-<<<<<<< HEAD
-    let todolist = await fetch(`http://localhost:5000/api/items/put/${id_user}/${month}/${a}`, {
-=======
     console.log(id_user, month, a)
     let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${a}`, {
->>>>>>> bb9dbb962658f3c153840e276493d25b91af45c5
         method: "GET",
         headers: {
           "Content-Type": "application/json",
