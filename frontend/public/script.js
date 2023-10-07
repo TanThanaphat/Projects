@@ -60,6 +60,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
             if (currentDayOrder == FirstDay) isstart = true;
             if (daycount < days && isstart == true){
                 TableRow.children[j].className = "Month_TableData"
+
                 TableRow.children[j].innerText = ++n;
                 CurrentMonthtdElements[CurrentMonthtdElements.length] = TableRow.children[j]
                 daycount++;

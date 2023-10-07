@@ -7,7 +7,7 @@
     </head>
     <body class="dark">
         <nav style="text-align: center" class="navbar">
-            <h1 id="heading" style="font-size: 30;">Planner</h1>
+            <h1 id="heading" style="font-size: 50;">Planner</h1>
             <div class="popup" onclick="myFunction()"><span class="login">login</span></div>
         </nav>
         <div class="pop">
@@ -29,27 +29,31 @@
         <div class="wrapper">
     
                 <div class="col-1">
-                    <button id="left-arrow"><</button>
-            <span id="month-heading">January 2566</span>
-            <button id="right-arrow">></button>
-            <br></br>
-                <table>
-                    <thead>
-                        <tr>
-                            <td style="border: 2px;">Monday</td>
-                            <td>Tuesday</td>
-                            <td>Wednesday</td>
-                            <td>Thursday</td>
-                            <td>Friday</td>
-                            <td>Saturday</td>
-                            <td>Sunday</td>
-                        </tr>
-                        <tr></tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="7" class="months">
+                                    <button id="left-arrow"><</button>
+                                    <span id="month-heading">January 2566</span>
+                                    <button id="right-arrow">></button>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr class="days">
+                                <td style="border: 2px;">Mon</td>
+                                <td>Tue</td>
+                                <td>Wed</td>
+                                <td>Thu</td>
+                                <td>Fri</td>
+                                <td>Sat</td>
+                                <td>Sun</td>
+                            </tr>
+                            <tr></tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
         
                 <div class="col-2">
                     <div class="top"> 
