@@ -5,9 +5,9 @@ const router = express.Router();
 //idแต่ละก่อง
 
 
-router.get('/get/:id_user/:month/:limit',async (req, res) => {
+router.get('/get/:id_user/:month/:year/:limit',async (req, res) => {
   try{
-    const itemformIDsort = await Item.find({"id_user":req.params.id_user , "month":req.params.month}).sort({day:1}).limit(req.params.limit);
+    const itemformIDsort = await Item.find({"id_user":req.params.id_user , "month":req.params.month, "year":req.params.year}).sort({day:1}).limit(req.params.limit);
     return res.json({itemformIDsort});
   }
   catch(err)
@@ -19,9 +19,9 @@ router.get('/get/:id_user/:month/:limit',async (req, res) => {
 
 
 
-router.get('/get/:id_user/:month',async (req, res) => {
+router.get('/get/:id_user/:month/:year',async (req, res) => {
   try{
-    const itemformID = await Item.find({"id_user":req.params.id_user , "month":req.params.month});
+    const itemformID = await Item.find({"id_user":req.params.id_user , "month":req.params.month, "year":req.params.year});
     return res.json({itemformID});
   }
   catch(err)

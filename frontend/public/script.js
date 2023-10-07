@@ -319,7 +319,7 @@ async function createuser() {
  async function gettodolist(month) {
     let a = 10;
     console.log(id_user, month, a)
-    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${a}`, {
+    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${year}/${a}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -329,7 +329,7 @@ async function createuser() {
  }
 
  async function getmounthbox(month) {
-    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}`, {
+    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${year}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
