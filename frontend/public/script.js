@@ -10,6 +10,14 @@ let m = -1;
 let year = 2566;
 
 let CurrentMonth;
+let CurrentMonthtdElements = [];
+
+let LoginPopup = document.querySelector("#myPopup")
+
+const LoginButton = document.querySelector(".submit");
+
+let id_user = null;
+let currentMonth_UserData;
 
 function myFunction() {
     var popup = document.getElementById("myPopup");
@@ -21,6 +29,8 @@ function verified() {
 }
 
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
+    CurrentMonthtdElements = []
+
     const length = TableBody.children.length
     for (let i = 0; i < length; i++)
         TableBody.children[0].remove()
@@ -48,8 +58,9 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
             
             if (currentDayOrder == FirstDay) isstart = true;
             if (daycount < days && isstart == true){
-                TableRow.children[j].style.backgroundColor = "rgb(217, 217, 217)"
+                TableRow.children[j].className = "Month_TableData"
                 TableRow.children[j].innerText = ++n;
+                CurrentMonthtdElements[CurrentMonthtdElements.length] = TableRow.children[j]
                 daycount++;
             } else {
                 if (isstart == true){
@@ -59,6 +70,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
             }
         }
     }
+    console.log(CurrentMonthtdElements)
     /* add day number for before and next month */
     currentDayOrder = FirstDay
     if (currentDayOrder == 0) currentDayOrder = 7;
@@ -69,6 +81,8 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
     for (let i = mbefore_days - currentDayOrder; i < mbefore_days; i++){
         TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1;
     }
+
+    LoadCurrentMonth_UserData()
 }
 
 function getDaysAmount(realmonth, christyear){
@@ -178,19 +192,25 @@ TodoListAdd_Button.addEventListener("click", () => {
     }
 })
 
-let LoginPopup = document.querySelector("#myPopup")
-
-const LoginButton = document.querySelector(".submit");
-
-let id_user = null;
-let currentMonth_UserData;
-
 function LoadCurrentMonth_UserData(){
+    console.log(id_user)
     if (id_user != null){
         gettodolist(CurrentMonth)
             .then(function(result){
                 currentMonth_UserData = result.itemformIDsort
-                console.log(currentMonth_UserData);
+                console.log(currentMonth_UserData, currentMonth_UserData.length);
+                if (currentMonth_UserData.length != 0){
+                    for (let i = 0; i < currentMonth_UserData.length; i++){
+                        const todo_Array = currentMonth_UserData[i].todo
+                        for (let j = 0; j < todo_Array.length; j++){
+                            console.log(todo_Array[j])
+                            let newText = document.createElement("p")
+                            newText.innerText = todo_Array[j]
+                            CurrentMonthtdElements[currentMonth_UserData[i].day - 1].appendChild(newText)
+                        }
+                        console.log("----------")
+                    }
+                }
             })
     }
 }

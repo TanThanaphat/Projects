@@ -89,6 +89,16 @@ table {
 
 }
 
+.Month_TableData {
+  background-color: rgb(217, 217, 217);
+  position: relative;
+}
+
+.Month_TableData p {
+  /* position: absolute; */
+  overflow: hidden;
+}
+
 tbody tr:first-child td:first-child {
   border-top-left-radius: 34px;
 }
