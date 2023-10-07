@@ -355,13 +355,18 @@ async function createuser() {
     document.getElementById("myForm").style.display = "none";
     }
     
-    function showpic() {
+    function gotosignin() {
       document.getElementById('guestbtn').style.display = "none";
       document.getElementById('loginbtn').style.display = "none";
       document.getElementById('signinbtn').style.display = "none";
       document.getElementById('signinnew').style.display = "block";
+      document.getElementById('gologin').style.display = "block";
       
     }
-    function closepic() {
+    function gotologin() {
+      document.getElementById('guestbtn').style.display = "block";
       document.getElementById('loginbtn').style.display = "block";
+      document.getElementById('signinbtn').style.display = "block";
+      document.getElementById('signinnew').style.display = "none";
+      document.getElementById('gologin').style.display = "none";
     }

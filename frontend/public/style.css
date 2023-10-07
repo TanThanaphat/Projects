@@ -243,7 +243,7 @@ table{
 /* The popup form - hidden by default */
 .form-popup {
   margin: auto;
-  width : 600px;
+  width : 500px;
   z-index: 100;
   
 }
@@ -261,7 +261,7 @@ table{
   animation: fadeIn 1s;
 }
 .left-side{
-  width: 300px;
+  width: 280px;
   padding-right: 20px;
 }
 .right-side{

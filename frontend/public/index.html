@@ -14,15 +14,16 @@
             <form class="form-container">
                 <div style="border-right-style:groove;" class="left-side">
                         <h1 style="text-align: center;">Login</h1>
-                        <label for="email"><b>Email</b></label>
-                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <label for="Username"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="email" required>
 
                         <label for="psw"><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" name="psw" required>
                         <button style="border-radius: 10px;" type="submit" class="btn" id="loginbtn">Login</button>
                         <button style="border-radius: 10px;" type="button" class="btn cancel" id="guestbtn" onclick="closeForm()">Guest</button>
-                        <button style="border-radius: 10px; display: none;" type="button" class="btn signin" id="signinnew" onclick="closeForm()">sign in</button>
-                        <p class = "signin"onclick="showpic()" id="signinbtn">Sign in</p>
+                        <button style="border-radius: 10px; display: none;" type="button" class="btn signin" id="signinnew" onclick="closeForm()">Sign in</button>
+                        <p style="margin: auto;" class = "signin"onclick="gotosignin()" id="signinbtn">Sign in</p>
+                        <p style="display: none;" class = "signin"onclick="gotologin()" id="gologin">Log in</p>
                 </div>
                 <div class="right-side"> 
                         <img src="logo.png" class="logo">
