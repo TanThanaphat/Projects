@@ -49,7 +49,7 @@ router.put('/put/:id',async (req, res) => {
   }
 })
 
-router.post('/creact',async (req,res) => {
+router.post('/create',async (req,res) => {
      try{
       const newUser = new Item(req.body);
       await newUser.save();

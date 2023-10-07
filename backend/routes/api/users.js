@@ -30,9 +30,9 @@ router.post('/login',async (req, res) => {
   catch(err)
   {
     console.log(err);
-    return res.status(500).json({"error":err});
+    return res.status(500).json({"error":"Username not found"});
   }
-  return res.status(500).json({"error":{}});
+  return res.status(500).json({"error":"Password not matched"});
 });
 
 

@@ -16,7 +16,15 @@ let CurrentData;
 
 let LoginPopup = document.querySelector("#myPopup")
 
-const LoginButton = document.querySelector(".submit");
+const LoginForm = document.getElementById('LoginForm')
+const GuestButton = document.getElementById('guestbtn');
+const LoginToggle = document.getElementById('gologin');  
+const SignInToggle = document.getElementById('signinbtn');
+
+const LoginButton = document.querySelector("#loginbtn");
+const SignInButton = document.getElementById('signinnew');
+
+let ButtonState = false;
 
 let id_user = null;
 
@@ -227,24 +235,32 @@ function LoadCurrentUserData(){
 }
 
 LoginButton.addEventListener('click', () => {
-    let Username = document.querySelector(".username > input").value
-    let Password = document.querySelector(".password > input").value
-    data = {userName: Username, password: Password}
-    console.log(Username, Password);
-    id_user = Login(Username, Password)
-    .then(function(result){
-        for (var key in result) {
-            if (key != "error"){
-                id_user = result[key]
-                console.log(id_user)
-                LoginPopup.className = "popuptext" /* change to class that is toggle off the login Popup or remove login page (This is after login) */
-                LoadCurrentUserData()
-            } else {
-                /* Incorrect Username/Password */
+    if (ButtonState == false){
+        ButtonState = true
+
+        let Username = document.querySelector("#username").value
+        let Password = document.querySelector("#psw").value
+        data = {userName: Username, password: Password}
+        console.log(Username, Password);
+        id_user = Login(Username, Password)
+        .then(function(result){
+            for (var key in result) {
+                if (key != "error"){
+                    id_user = result[key]
+                    console.log(id_user)
+                    closeForm()
+                    LoadCurrentUserData()
+                } else {
+                    /* Incorrect Username/Password */
+                }
+                break;
             }
-            break;
-        }
-    })
+        })
+
+        setTimeout(function(){
+            ButtonState = false
+        }, 1000)
+    }
 });
 
 async function Login(Username, Password) {
@@ -272,7 +288,7 @@ async function createitem() {
             "ทำการบ้าน",
             "อ่านหนังสือ"]
     };
-    await fetch('http://localhost:5000/api/items/creact', {
+    await fetch('http://localhost:5000/api/items/create', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -282,20 +298,25 @@ async function createitem() {
     return ;
  }
 
-async function createuser() {
-    const body = {
-    "name": "nameadwa",
-    "userName": "saysar",
-    "password": "1234"
+async function createuser(SignIn_Username, SignIn_Password) {
+    const data = {
+    "name": " ",
+    "userName": SignIn_Username,
+    "password": SignIn_Password
     };
-    await fetch('http://localhost:5000/api/users/creact', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-    return ;
+    console.log(data)
+    try {
+        await fetch('http://localhost:5000/api/users/create', {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        return "Completed";
+    } catch {
+        return "Error"
+    }
  }
 
  async function update_item() {
@@ -327,17 +348,6 @@ async function createuser() {
     return ;
  }
 
- async function getSortedtodolist(month, year, limit) {
-    console.log(id_user, month, year, limit)
-    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${year}/${limit}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        }
-      });
-    return todolist.json();
- }
-
  async function getAlltodolist(month, year) {
     let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}`, {
         method: "GET",
@@ -347,26 +357,81 @@ async function createuser() {
       });
     return todolist.json();
  }
- function openForm() {
-    document.getElementById("myForm").style.display = "block";
+
+ SignInButton.addEventListener("click", () => {
+    if (ButtonState == false){
+        ButtonState = true
+
+        let Username = document.querySelector("#username").value
+        let Password = document.querySelector("#psw").value
+        data = {userName: Username, password: Password}
+        console.log(Username, Password);
+        Login(Username, Password)
+        .then(function(result){
+            for (var key in result) {
+                if (key == "error" && result[key] == "Username not found"){
+                    console.log("No account registered yet")
+                    createuser(Username, Password)
+                        .then(function(status){
+                            if (status == "Completed"){
+                                
+                            }
+                        })
+                    /* id_user = result[key]
+                    console.log(id_user)
+                    closeForm()
+                    LoadCurrentUserData()
+                    */
+                } else {
+                    console.log("There is already account registed")
+                    /* Incorrect Username/Password */
+                }
+                break;
+            }
+        })
+
+        setTimeout(function(){
+            ButtonState = false
+        }, 1000)
     }
+ })
+
+function openForm() {
+    LoginForm.style.display = "block";
+}
   
-    function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-    }
+function closeForm() {
+    LoginForm.style.display = "none";
+}
     
-    function gotosignin() {
-      document.getElementById('guestbtn').style.display = "none";
-      document.getElementById('loginbtn').style.display = "none";
-      document.getElementById('signinbtn').style.display = "none";
-      document.getElementById('signinnew').style.display = "block";
-      document.getElementById('gologin').style.display = "block";
-      
+SignInToggle.addEventListener("click", () => {
+    if (ButtonState == false){
+        ButtonState = true
+
+        GuestButton.style.display = "none";
+        LoginButton.style.display = "none";
+        SignInToggle.style.display = "none";
+        SignInButton.style.display = "block";
+        LoginToggle.style.display = "block";
+
+        setTimeout(function(){
+            ButtonState = false
+        }, 1000)
     }
-    function gotologin() {
-      document.getElementById('guestbtn').style.display = "block";
-      document.getElementById('loginbtn').style.display = "block";
-      document.getElementById('signinbtn').style.display = "block";
-      document.getElementById('signinnew').style.display = "none";
-      document.getElementById('gologin').style.display = "none";
+})
+
+LoginToggle.addEventListener("click", () => {
+    if (ButtonState == false){
+        ButtonState = true
+
+        GuestButton.style.display = "block";
+        LoginButton.style.display = "block";
+        SignInToggle.style.display = "block";
+        SignInButton.style.display = "none";
+        LoginToggle.style.display = "none";
+
+        setTimeout(function(){
+            ButtonState = false
+        }, 1000)
     }
+})
