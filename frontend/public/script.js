@@ -347,3 +347,21 @@ async function createuser() {
       });
     return todolist.json();
  }
+ function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    }
+  
+    function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+    }
+    
+    function showpic() {
+      document.getElementById('guestbtn').style.display = "none";
+      document.getElementById('loginbtn').style.display = "none";
+      document.getElementById('signinbtn').style.display = "none";
+      document.getElementById('signinnew').style.display = "block";
+      
+    }
+    function closepic() {
+      document.getElementById('loginbtn').style.display = "block";
+    }

@@ -8,23 +8,26 @@
     <body class="dark">
         <nav style="text-align: center" class="navbar">
             <h1 id="heading" style="font-size: 50;">Planner</h1>
-            <div class="popup" onclick="myFunction()"><span class="login">login</span></div>
         </nav>
-        <div class="pop">
-            <div class="popuptext" id="myPopup">
-                <h2 style="font-weight: bold; margin-top: 30px ">LOGIN</h2>
-                <div class="username">
-                    <p id="user">Username</p>
-                    <i class="glyphicon glyphicon-user"></i>
-                    <input type="text" class="intext">
+        <button class="open-button" onclick="openForm()">Login</button>
+        <div class="form-popup" id="myForm">
+            <form class="form-container">
+                <div style="border-right-style:groove;" class="left-side">
+                        <h1 style="text-align: center;">Login</h1>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>
+                        <button style="border-radius: 10px;" type="submit" class="btn" id="loginbtn">Login</button>
+                        <button style="border-radius: 10px;" type="button" class="btn cancel" id="guestbtn" onclick="closeForm()">Guest</button>
+                        <button style="border-radius: 10px; display: none;" type="button" class="btn signin" id="signinnew" onclick="closeForm()">sign in</button>
+                        <p class = "signin"onclick="showpic()" id="signinbtn">Sign in</p>
                 </div>
-                <div class="password">
-                    <p id="pass">Password</p>
-                    <i class="glyphicon glyphicon-lock"></i>
-                    <input type="password" class="intext">
+                <div class="right-side"> 
+                        <img src="logo.png" class="logo">
                 </div>
-                <button class="submit">Login</button>
-            </div>
+            </form>
         </div>
         <div class="wrapper">
     
