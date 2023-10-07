@@ -12,12 +12,13 @@ let year = 2566;
 let CurrentMonth;
 let CurrentMonthtdElements = [];
 
+let CurrentData;
+
 let LoginPopup = document.querySelector("#myPopup")
 
 const LoginButton = document.querySelector(".submit");
 
 let id_user = null;
-let currentMonth_UserData;
 
 function myFunction() {
     var popup = document.getElementById("myPopup");
@@ -81,6 +82,8 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
     for (let i = mbefore_days - currentDayOrder; i < mbefore_days; i++){
         TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1;
     }
+
+    LoadCurrentMonth_UserData()
 
     /* */
 }
@@ -193,24 +196,31 @@ TodoListAdd_Button.addEventListener("click", () => {
 })
 
 function LoadCurrentMonth_UserData(){
+    if (CurrentData != null){
+        console.log(CurrentData, CurrentData.length);
+        if (CurrentData.length != 0){
+            for (let i = 0; i < CurrentData.length; i++){
+                if (CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                    const todo_Array = CurrentData[i].todo
+                    for (let j = 0; j < todo_Array.length; j++){
+                        console.log(todo_Array[j])
+                        let newText = document.createElement("p")
+                        newText.innerText = todo_Array[j]
+                        CurrentMonthtdElements[CurrentData[i].day - 1].appendChild(newText)
+                    }
+                    console.log("----------")
+                }
+            }
+        }
+    }
+}
+function LoadCurrentUserData(){
     console.log(id_user)
     if (id_user != null){
-        getAlltodolist(CurrentMonth, year)
+        getAlltodolist()
             .then(function(result){
-                currentMonth_UserData = result.itemformID
-                console.log(currentMonth_UserData, currentMonth_UserData.length);
-                if (currentMonth_UserData.length != 0){
-                    for (let i = 0; i < currentMonth_UserData.length; i++){
-                        const todo_Array = currentMonth_UserData[i].todo
-                        for (let j = 0; j < todo_Array.length; j++){
-                            console.log(todo_Array[j])
-                            let newText = document.createElement("p")
-                            newText.innerText = todo_Array[j]
-                            CurrentMonthtdElements[currentMonth_UserData[i].day - 1].appendChild(newText)
-                        }
-                        console.log("----------")
-                    }
-                }
+                CurrentData = result.itemformID
+                LoadCurrentMonth_UserData()
             })
     }
 }
@@ -227,7 +237,7 @@ LoginButton.addEventListener('click', () => {
                 id_user = result[key]
                 console.log(id_user)
                 LoginPopup.className = "popuptext" /* change to class that is toggle off the login Popup or remove login page (This is after login) */
-                LoadCurrentMonth_UserData()
+                LoadCurrentUserData()
             } else {
                 /* Incorrect Username/Password */
             }
