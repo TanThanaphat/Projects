@@ -37,7 +37,7 @@ router.post('/login',async (req, res) => {
 
 
 
-router.post('/creact',async (req,res) => {
+router.post('/create',async (req,res) => {
   try{
     const newUser = new Users(req.body);
     await newUser.save();
