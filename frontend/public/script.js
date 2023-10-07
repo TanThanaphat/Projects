@@ -82,7 +82,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
         TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1;
     }
 
-    LoadCurrentMonth_UserData()
+    /* */
 }
 
 function getDaysAmount(realmonth, christyear){
@@ -195,9 +195,9 @@ TodoListAdd_Button.addEventListener("click", () => {
 function LoadCurrentMonth_UserData(){
     console.log(id_user)
     if (id_user != null){
-        gettodolist(CurrentMonth)
+        getAlltodolist(CurrentMonth, year)
             .then(function(result){
-                currentMonth_UserData = result.itemformIDsort
+                currentMonth_UserData = result.itemformID
                 console.log(currentMonth_UserData, currentMonth_UserData.length);
                 if (currentMonth_UserData.length != 0){
                     for (let i = 0; i < currentMonth_UserData.length; i++){
@@ -316,10 +316,9 @@ async function createuser() {
     return ;
  }
 
- async function gettodolist(month) {
-    let a = 10;
-    console.log(id_user, month, a)
-    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${year}/${a}`, {
+ async function getSortedtodolist(month, year, limit) {
+    console.log(id_user, month, year, limit)
+    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${year}/${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -328,12 +327,12 @@ async function createuser() {
     return todolist.json();
  }
 
- async function getmounthbox(month) {
+ async function getAlltodolist(month, year) {
     let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}/${month}/${year}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         }
       });
-    return monthitembox.json();
+    return todolist.json();
  }
