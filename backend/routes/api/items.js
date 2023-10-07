@@ -19,9 +19,9 @@ router.get('/get/:id_user/:month/:year/:limit',async (req, res) => {
 
 
 
-router.get('/get/:id_user/:month/:year',async (req, res) => {
+router.get('/get/:id_user',async (req, res) => {
   try{
-    const itemformID = await Item.find({"id_user":req.params.id_user , "month":req.params.month, "year":req.params.year});
+    const itemformID = await Item.find({"id_user":req.params.id_user });
     return res.json({itemformID});
   }
   catch(err)
