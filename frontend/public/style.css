@@ -270,20 +270,14 @@ font-weight: bold;
   margin-top: 5%;
   }
 
-  #todo-listAddButton {
+  #todo-listAddButton, #task-addButton, #task-cancelButton {
     background-color: #653db4;
     border-radius: 20px;
     color: white;
     padding: 10px 10px;
     border: none;
   }
-  #todo-listAddButton {
-    background-color: #653db4;
-    border-radius: 20px;
-    color: white;
-    padding: 10px 10px;
-    border: none;
-  }
+  
   #DeleteData {
     background-color: #653db4;
     width: 30px;
