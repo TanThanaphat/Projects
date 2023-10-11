@@ -43,7 +43,7 @@ let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
 
 let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
 
-let TaskAddEnable = false
+let TaskAddEnable = true
 
 DeleteData.addEventListener("click", () => {
     if (TaskAddEnable == true){
@@ -182,8 +182,6 @@ function OnLoadListOfDay(){
             AddTask(SelectedBox_ArrayData[j])
         }
     }
-
-    TaskAddEnable = true
 }
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
     CurrentMonthtdElements = []
@@ -220,9 +218,11 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
 
                 currentDayBox.style.cursor = "pointer"
                 currentDayBox.addEventListener("click", () => {
-                    console.log(currentDay, currentDayBox.className)
-                    CurrentClickedDay = currentDay
-                    OnLoadListOfDay()
+                    if (TaskAddEnable == true){
+                        console.log(currentDay, currentDayBox.className)
+                        CurrentClickedDay = currentDay
+                        OnLoadListOfDay()
+                    }
                 })
                 currentDayBox.addEventListener("mousedown", () => {
                     currentDayBox.style.opacity = 0.6
@@ -313,10 +313,10 @@ function ChangeMonth(status){
 }
 
 leftArrow.addEventListener("click", () => {
-    ChangeMonth(-1)
+    if (TaskAddEnable == true) ChangeMonth(-1)
 })
 rightArrow.addEventListener("click", () => {
-    ChangeMonth(1)
+    if (TaskAddEnable == true) ChangeMonth(1)
 })
 
 ChangeMonth(1)
