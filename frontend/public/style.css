@@ -54,9 +54,6 @@ p{
 }
 
 
-
-
-
 #heading{
   text-align: center;
   border-bottom: solid;
@@ -64,16 +61,16 @@ p{
   padding-top: 20px;
   padding-bottom: 20px;
 }
-/*.navbar {
+.navbar {
   padding: 10px;
-  display :inline
-  /* background-color:rgb(182, 182, 182); 
-}*/
+  display : center;
+  margin : 2px;
+}
 
 
 
 .wrapper{
-  display: flex;
+  display: none;
   box-sizing: border-box;
   background-color: var(--bg-body);
 }
@@ -319,9 +316,7 @@ font-weight: bold;
   padding: 10px 10px;
   border: none;
   cursor: pointer;
-  position: fixed;
-  top: 30xpx;
-  right: 28px;
+  margin-left: 87%;
   width: 200px;
   height: 50px;
 }
