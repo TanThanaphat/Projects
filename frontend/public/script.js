@@ -10,7 +10,7 @@ let m = -1;
 let year = 2566;
 
 let CurrentMonth;
-let CurrentClickedDay = 0;
+let CurrentClickedDay;
 let SelectedBox_ArrayData;
 let SelectedBoxID = null;
 
@@ -78,6 +78,7 @@ function FindSelectedDate_Data(){
 }
 
 TodoListAdd_Button.addEventListener("click", () => {
+    console.log(TaskAddEnable)
     if (TaskAddEnable == true){
         TaskAddEnable = false;
 
@@ -105,10 +106,10 @@ TodoListAdd_Button.addEventListener("click", () => {
             CancelButton.remove()
             TaskName_Input.remove()
             TodoListAdd_Button.style.display = null;
-            TaskAddEnable = true
         }
         CancelButton.addEventListener("click", () => {
             reset()
+            TaskAddEnable = true
         })
 
         AddButton.addEventListener("click", () => {
@@ -125,6 +126,7 @@ TodoListAdd_Button.addEventListener("click", () => {
                     if (SelectedBoxID != null){
                         update_item(SelectedBox_ArrayData, NewTask, SelectedBoxID)
                     } else {
+                        console.log("CurrentClickedDay :", CurrentClickedDay)
                         createitem(CurrentClickedDay, CurrentMonth, year, NewTask)
                         CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData_Marked"
                     }
@@ -132,6 +134,9 @@ TodoListAdd_Button.addEventListener("click", () => {
                     setTimeout(function(){
                         LoadCurrentUserData()
                     }, 500)
+                    setTimeout(function(){
+                        TaskAddEnable = true
+                    }, 1000)
                 } else {
                     let DateData = FindSelectedDate_Data()
                     console.log(DateData)
@@ -152,6 +157,7 @@ TodoListAdd_Button.addEventListener("click", () => {
                             }
                         }
                     }
+                    TaskAddEnable = true
                 }
             }
         })
@@ -159,15 +165,19 @@ TodoListAdd_Button.addEventListener("click", () => {
 })
 
 function AddNewTask(ListName){
+    const TableRowSpacing = "8px"
+
     let newTableRow = document.createElement("tr")
+    newTableRow.style.height = TableRowSpacing
     newTableRow.className = "todolist"
 
     let newTableData = document.createElement("td")
+    newTableData.style.height = TableRowSpacing
     newTableData.className = "List"
 
     let newTask = document.createElement("p")
     newTask.className = "Task"
-    newTask.innerText = ListName
+    newTask.innerHTML = `&bull; &ensp; ${ListName}`
 
     newTableData.appendChild(newTask)
     newTableRow.appendChild(newTableData)
@@ -181,7 +191,7 @@ function OnLoadListOfDay(){
         Todolist_TableBody.children[0].remove()
     }
 
-    if (CurrentClickedDay > 0){
+    if (CurrentClickedDay != undefined){
         CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
         
         SelectedBox_ArrayData = FindSelectedDate_Data();
@@ -191,7 +201,7 @@ function OnLoadListOfDay(){
             }
         }
     } else {
-        CurrentDayIndicate.innerText = "Select Day"
+        CurrentDayIndicate.innerText = "Select day"
     }
 }
 
@@ -341,7 +351,6 @@ function LoadCurrentMonth_UserData(){
             for (let i = 0; i < CurrentData.length; i++){
                 if (CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
                     const todo_Array = CurrentData[i].todo
-                    
                     CurrentMonthtdElements[CurrentData[i].day - 1].className = "Month_TableData_Marked"
                     for (let j = 0; j < todo_Array.length; j++){
                         console.log(todo_Array[j])
@@ -354,8 +363,6 @@ function LoadCurrentMonth_UserData(){
                 }
             }
         }
-    } else { /* For guest */
-
     }
 }
 
