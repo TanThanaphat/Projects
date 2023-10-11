@@ -120,11 +120,8 @@ tbody tr:last-child td:last-child {
 }
 
 thead tr td{
+  align-items: center;
   font-size: 19px;
-}
-
-thead tr td .month-heading {
-  text-align: center;
 }
 
 thead tr .months{
@@ -155,13 +152,17 @@ tbody{
 tbody tr td{
   border: none;
   height: 98px;
-  padding-bottom: 10%;
-  padding-left: 1.5%
+  /*padding-bottom: 10%;
+  padding-left: 1.5%*/
 }
 
 table{
   background-color: var(--bg-main);
-  
+}
+
+.month-heading-box {
+  width: 300px;
+  align-items: center;
 }
 
 #left-arrow, #right-arrow{
@@ -179,9 +180,7 @@ table{
 }
 
 #left-arrow{
-  top: 185px;
-  left: 275px;
-  position: fixed;
+  margin-right: 5px;
 }
 
 #left-arrow:hover{
@@ -190,9 +189,7 @@ table{
 }
 
 #right-arrow{
-  top: 185px;
-  left: 550px;
-  position: fixed;
+  margin-left: 5px;
 }
 
 #right-arrow:hover{
@@ -328,6 +325,7 @@ font-weight: bold;
 /* The popup form - hidden by default */
 .form-popup {
   margin: auto;
+  position: relative;
   width : 500px;
   z-index: 100;
   color: var(--color-txt)
