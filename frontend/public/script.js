@@ -419,13 +419,13 @@ LoginButton.addEventListener('click', () => {
         }, 1000)
     }
 });
-
+const url = "http://taskmanager.ddns.net:5000/"
 async function Login(Username, Password) {
     const body = {
         "userName":Username,
         "password":Password
     };
-    let s = await fetch('http://localhost:5000/api/users/login', {
+    let s = await fetch(`${url}api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -443,7 +443,7 @@ async function createitem(d, m, y, newTask) {
     "id_user":id_user,
     "todo":[newTask]
     };
-    await fetch('http://localhost:5000/api/items/create', {
+    await fetch(`${url}api/items/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -461,7 +461,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
     };
     console.log(data)
     try {
-        await fetch('http://localhost:5000/api/users/create', {
+        await fetch(`${url}api/users/create`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -480,7 +480,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
     const body = {
         "todo":DataToOverwrite
     };
-    await fetch(`http://localhost:5000/api/items/put/${idbox}`, {
+    await fetch(`${url}api/items/put/${idbox}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -491,7 +491,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
  }
 
  async function delete_item(idbox) {
-    await fetch(`http://localhost:5000/api/items/delete/${idbox}`, {
+    await fetch(`${url}api/items/delete/${idbox}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -501,7 +501,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
  }
 
  async function getAlltodolist(month, year) {
-    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}`, {
+    let todolist = await fetch(`${url}api/items/get/${id_user}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
