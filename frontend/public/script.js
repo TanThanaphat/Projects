@@ -111,19 +111,13 @@ TodoListAdd_Button.addEventListener("click", () => {
         AddButton.addEventListener("click", () => {
             let NewTask = TaskName_Input.value
             if (NewTask.length > 0){
-                let newLabel = document.createElement("label")
-                newLabel.className = "container"
-                newLabel.innerText = NewTask
+                reset()
+                
+                let newTask = document.createElement("p")
+                newTask.className = "Task"
+                newTask.innerText = NewTask
 
-                let InputCheckBox = document.createElement("input")
-                InputCheckBox.type = "checkbox"
-                let InputSpan = document.createElement("span")
-                InputSpan.className = "checkmark"
-
-                newLabel.appendChild(InputCheckBox)
-                newLabel.appendChild(InputSpan)
-
-                TodoList_Div.appendChild(newLabel)
+                TodoList_Div.appendChild(newTask)
 
                 console.log("Added value :", NewTask)
                 console.log("Added to box id :", SelectedBoxID)
@@ -137,8 +131,6 @@ TodoListAdd_Button.addEventListener("click", () => {
 
                 setTimeout(function(){
                     LoadCurrentUserData()
-
-                    reset()
                 }, 500)
             }
         })
@@ -155,19 +147,11 @@ function OnLoadListOfDay(){
     SelectedBox_ArrayData = FindSelectedDate_Data();
     if (SelectedBox_ArrayData != null){       
         function AddTask(TaskName){
-            let newLabel = document.createElement("label")
-            newLabel.className = "container"
-            newLabel.innerText = TaskName
+            let newTask = document.createElement("p")
+            newTask.className = "Task"
+            newTask.innerText = TaskName
 
-            let InputCheckBox = document.createElement("input")
-            InputCheckBox.type = "checkbox"
-            let InputSpan = document.createElement("span")
-            InputSpan.className = "checkmark"
-
-            newLabel.appendChild(InputCheckBox)
-            newLabel.appendChild(InputSpan)
-
-            TodoList_Div.appendChild(newLabel)
+            TodoList_Div.appendChild(newTask)
         }
 
         for (let j = 0; j < SelectedBox_ArrayData.length; j++){
