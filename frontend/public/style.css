@@ -274,12 +274,17 @@ font-weight: bold;
   margin-top: 5%;
   }
 
-  #todo-listAddButton, #task-addButton, #task-cancelButton {
+   #task-addButton, #task-cancelButton {
     background-color: #653db4;
     border-radius: 20px;
     color: white;
     padding: 10px 10px;
     border: none;
+  }
+  #todo-listAddButton{
+    margin-right: 50%;
+    width: 75px;
+
   }
   #TaskName-Input {
     width: 100%;
@@ -289,9 +294,9 @@ font-weight: bold;
     background: var(--popup);
   }
   #DeleteData {
-    background-color: #653db4;
-    width: 30px;
-    height: 30px;
+    margin-left: 85%;
+    width: 90px;
+   
     border-radius: 50%;
     color: white;
     padding: 10px 10px;
@@ -315,7 +320,6 @@ font-weight: bold;
   color: white;
   padding: 10px 10px;
   border: none;
-  cursor: pointer;
   margin-left: 87%;
   width: 200px;
   height: 50px;
