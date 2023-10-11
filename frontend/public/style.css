@@ -278,7 +278,7 @@ padding-bottom: 20px;
   #todo-listAddButton{
     margin-right: 50%;
     width: 55px;
-
+    cursor: pointer;
   }
   #TaskName-Input {
     width: 100%;
@@ -287,14 +287,22 @@ padding-bottom: 20px;
     border: none;
     background: var(--popup);
   }
-  #DeleteData {
-    margin-left: 85%;
-    width: 70px;
-   
+  .DeleteTask {
+    width: 56px;
     border-radius: 50%;
     color: white;
     padding: 10px 10px;
     border: none;
+    cursor: pointer;
+  }
+  #DeleteData {
+    margin-left: 85%;
+    width: 70px;
+    border-radius: 50%;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
   }
   buttom
   {

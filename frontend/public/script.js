@@ -124,7 +124,7 @@ TodoListAdd_Button.addEventListener("click", () => {
 
                 if (CurrentUsername != null){
                     if (SelectedBoxID != null){
-                        update_item(SelectedBox_ArrayData, NewTask, SelectedBoxID)
+                        update_item(SelectedBox_ArrayData, SelectedBoxID, NewTask, "update")
                     } else {
                         console.log("CurrentClickedDay :", CurrentClickedDay)
                         createitem(CurrentClickedDay, CurrentMonth, year, NewTask)
@@ -165,6 +165,8 @@ TodoListAdd_Button.addEventListener("click", () => {
 })
 
 function AddNewTask(ListName){
+    const currentindex = Todolist_TableBody.children.length
+
     const TableRowSpacing = "8px"
 
     let newTableRow = document.createElement("tr")
@@ -179,10 +181,87 @@ function AddNewTask(ListName){
     newTask.className = "Task"
     newTask.innerHTML = `&bull; &ensp; ${ListName}`
 
+    let TableData_delete = document.createElement("td")
+    TableData_delete.style.height = TableRowSpacing
+    TableData_delete.className = "List"
+
+    let deleteTask_btn = document.createElement("img")
+    deleteTask_btn.className = "DeleteTask"
+    deleteTask_btn.src = "x.svg"
+
+
     newTableData.appendChild(newTask)
+    TableData_delete.appendChild(deleteTask_btn)
+
     newTableRow.appendChild(newTableData)
+    newTableRow.appendChild(TableData_delete)
 
     Todolist_TableBody.appendChild(newTableRow)
+
+    deleteTask_btn.addEventListener("click", () => {
+        newTableRow.remove()
+        if (TaskAddEnable == true){
+            TaskAddEnable = false
+
+            let DateData = FindSelectedDate_Data()
+
+            if (CurrentUsername != null){
+                console.log(DateData)
+                if (DateData != null){
+                    delete DateData[currentindex]
+                    let newArray = [];
+                    for (let i = 0; i < DateData.length; i++){
+                        if (DateData[i] != undefined){
+                            newArray[newArray.length] = DateData[i]
+                        }
+                    }
+                    DateData = newArray
+                    if (DateData.length > 0) {
+                        update_item(DateData, SelectedBoxID)
+                    } else {
+                        delete_item(SelectedBoxID)
+                        CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
+                    }
+
+                    setTimeout(function(){
+                        LoadCurrentUserData()
+                    }, 500)
+                    setTimeout(function(){
+                        TaskAddEnable = true
+                    }, 1000)
+                }
+            } else {
+                delete DateData[currentindex]
+                let newArray = [];
+                for (let i = 0; i < DateData.length; i++){
+                    if (DateData[i] != undefined){
+                        newArray[newArray.length] = DateData[i]
+                    }
+                }
+                DateData = newArray
+                if (DateData.length != 0) {
+                    for (let i = 0; i < CurrentData.length; i++){
+                        if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                            CurrentData[i].todo = DateData;
+                            break;
+                        }
+                    }
+                } else {
+                    newArray = []
+                    for (let i = 0; i < CurrentData.length; i++){
+                        if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                        } else {
+                            newArray[newArray.length] = CurrentData[i]
+                        }
+                    }
+                    CurrentData = newArray
+                    CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
+                }
+                
+                TaskAddEnable = true
+            }
+        }
+    })
 }
 
 function OnLoadListOfDay(){
@@ -419,7 +498,7 @@ LoginButton.addEventListener('click', () => {
         }, 1000)
     }
 });
-const url = "http://taskmanager.ddns.net:5000/"
+const url = "http://localhost:5000/"
 async function Login(Username, Password) {
     const body = {
         "userName":Username,
@@ -474,9 +553,12 @@ async function createuser(SignIn_Username, SignIn_Password) {
     }
  }
 
- async function update_item(prevData, newTask, idbox) {
-    let DataToOverwrite = prevData
-    DataToOverwrite[DataToOverwrite.length] = newTask
+ async function update_item(prevData, idbox, newTask, instruction) {
+    let DataToOverwrite = prevData 
+    if (instruction == "update"){
+        DataToOverwrite[DataToOverwrite.length] = newTask
+    }
+    
     const body = {
         "todo":DataToOverwrite
     };
