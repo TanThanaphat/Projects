@@ -120,8 +120,11 @@ tbody tr:last-child td:last-child {
 }
 
 thead tr td{
-  text-align: center;
   font-size: 19px;
+}
+
+thead tr td .month-heading {
+  text-align: center;
 }
 
 thead tr .months{
@@ -176,7 +179,9 @@ table{
 }
 
 #left-arrow{
-  margin-right: 5px;
+  top: 185px;
+  left: 275px;
+  position: fixed;
 }
 
 #left-arrow:hover{
@@ -185,7 +190,9 @@ table{
 }
 
 #right-arrow{
-  margin-left: 5px;
+  top: 185px;
+  left: 550px;
+  position: fixed;
 }
 
 #right-arrow:hover{
@@ -277,7 +284,13 @@ font-weight: bold;
     padding: 10px 10px;
     border: none;
   }
-  
+  #TaskName-Input {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: var(--popup);
+  }
   #DeleteData {
     background-color: #653db4;
     width: 30px;
