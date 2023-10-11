@@ -10,7 +10,7 @@ let m = -1;
 let year = 2566;
 
 let CurrentMonth;
-let CurrentClickedDay;
+let CurrentClickedDay = 0;
 let SelectedBox_ArrayData;
 let SelectedBoxID = null;
 
@@ -176,19 +176,25 @@ function AddNewTask(ListName){
 }
 
 function OnLoadListOfDay(){
-    CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
     const TasksLength = Todolist_TableBody.children.length
     for (let i = 0; i < TasksLength; i++){
         Todolist_TableBody.children[0].remove()
     }
-    
-    SelectedBox_ArrayData = FindSelectedDate_Data();
-    if (SelectedBox_ArrayData != null){       
-        for (let j = 0; j < SelectedBox_ArrayData.length; j++){
-            AddNewTask(SelectedBox_ArrayData[j])
+
+    if (CurrentClickedDay > 0){
+        CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
+        
+        SelectedBox_ArrayData = FindSelectedDate_Data();
+        if (SelectedBox_ArrayData != null){       
+            for (let j = 0; j < SelectedBox_ArrayData.length; j++){
+                AddNewTask(SelectedBox_ArrayData[j])
+            }
         }
+    } else {
+        CurrentDayIndicate.innerText = "Select Day"
     }
 }
+
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
     CurrentMonthtdElements = []
 
@@ -330,6 +336,7 @@ ChangeMonth(1)
 function LoadCurrentMonth_UserData(){
     if (CurrentData != null){
         console.log(CurrentData, CurrentData.length);
+        OnLoadListOfDay()
         if (CurrentData.length != 0){
             for (let i = 0; i < CurrentData.length; i++){
                 if (CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
@@ -536,12 +543,8 @@ async function createuser(SignIn_Username, SignIn_Password) {
     }
  })
 
-function openForm() {
-    LoginForm.style.display = "block";
-}
-  
 function closeForm() {
-    LoginForm.style.display = "none";
+    LoginForm.remove()
     calendar.style.display = "flex";
 }
 
