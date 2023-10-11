@@ -10,7 +10,7 @@ let m = -1;
 let year = 2566;
 
 let CurrentMonth;
-let CurrentClickedDay = 0;
+let CurrentClickedDay;
 let SelectedBox_ArrayData;
 let SelectedBoxID = null;
 
@@ -34,12 +34,11 @@ const LoginHeading = document.querySelector("#LoginHeading")
 
 const DeleteData = document.querySelector("#DeleteData")
 
-const Todolist_TableBody = document.querySelector(".todobody")
-
 let ButtonState = false;
 
 let id_user = null;
 
+let TodoList_Div = document.querySelector(".List")
 let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
 
 let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
@@ -92,7 +91,7 @@ TodoListAdd_Button.addEventListener("click", () => {
         
         TaskName_Input.placeholder = "Enter your task"
         TaskName_Input.id = "#TaskName-Input"
-        Todolist_TableBody.appendChild(TaskName_Input)
+        TodoList_Div.appendChild(TaskName_Input)
 
         let CancelButton = document.createElement("button")
         CancelButton.innerText = "Cancel"
@@ -116,7 +115,11 @@ TodoListAdd_Button.addEventListener("click", () => {
             if (NewTask.length > 0){
                 reset()
 
-                AddNewTask(NewTask)
+                let newTask = document.createElement("p")
+                newTask.className = "Task"
+                newTask.innerText = NewTask
+
+                TodoList_Div.appendChild(newTask)
 
                 console.log("Added value :", NewTask)
                 console.log("Added to box id :", SelectedBoxID)
@@ -158,43 +161,28 @@ TodoListAdd_Button.addEventListener("click", () => {
     }
 })
 
-function AddNewTask(ListName){
-    let newTableRow = document.createElement("tr")
-    newTableRow.className = "todolist"
-
-    let newTableData = document.createElement("td")
-    newTableData.className = "List"
-
-    let newTask = document.createElement("p")
-    newTask.className = "Task"
-    newTask.innerText = ListName
-
-    newTableData.appendChild(newTask)
-    newTableRow.appendChild(newTableData)
-
-    Todolist_TableBody.appendChild(newTableRow)
-}
-
 function OnLoadListOfDay(){
-    const TasksLength = Todolist_TableBody.children.length
+    CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
+    const TasksLength = TodoList_Div.children.length
     for (let i = 0; i < TasksLength; i++){
-        Todolist_TableBody.children[0].remove()
+        TodoList_Div.children[0].remove()
     }
+    
+    SelectedBox_ArrayData = FindSelectedDate_Data();
+    if (SelectedBox_ArrayData != null){       
+        function AddTask(TaskName){
+            let newTask = document.createElement("p")
+            newTask.className = "Task"
+            newTask.innerText = TaskName
 
-    if (CurrentClickedDay > 0){
-        CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
-        
-        SelectedBox_ArrayData = FindSelectedDate_Data();
-        if (SelectedBox_ArrayData != null){       
-            for (let j = 0; j < SelectedBox_ArrayData.length; j++){
-                AddNewTask(SelectedBox_ArrayData[j])
-            }
+            TodoList_Div.appendChild(newTask)
         }
-    } else {
-        CurrentDayIndicate.innerText = "Select Day"
+
+        for (let j = 0; j < SelectedBox_ArrayData.length; j++){
+            AddTask(SelectedBox_ArrayData[j])
+        }
     }
 }
-
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
     CurrentMonthtdElements = []
 
@@ -336,7 +324,6 @@ ChangeMonth(1)
 function LoadCurrentMonth_UserData(){
     if (CurrentData != null){
         console.log(CurrentData, CurrentData.length);
-        OnLoadListOfDay()
         if (CurrentData.length != 0){
             for (let i = 0; i < CurrentData.length; i++){
                 if (CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
@@ -412,13 +399,13 @@ LoginButton.addEventListener('click', () => {
         }, 1000)
     }
 });
-
+const url = "http://taskmanager.ddns.net:5000/"
 async function Login(Username, Password) {
     const body = {
         "userName":Username,
         "password":Password
     };
-    let s = await fetch('http://localhost:5000/api/users/login', {
+    let s = await fetch(`${url}api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -426,6 +413,7 @@ async function Login(Username, Password) {
         body: JSON.stringify(body),
       });
     return await s.json();
+
 }
 
 async function createitem(d, m, y, newTask) {
@@ -436,7 +424,7 @@ async function createitem(d, m, y, newTask) {
     "id_user":id_user,
     "todo":[newTask]
     };
-    await fetch('http://localhost:5000/api/items/create', {
+    await fetch(`${url}api/items/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -454,7 +442,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
     };
     console.log(data)
     try {
-        await fetch('http://localhost:5000/api/users/create', {
+        await fetch(`${url}api/users/create`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -473,7 +461,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
     const body = {
         "todo":DataToOverwrite
     };
-    await fetch(`http://localhost:5000/api/items/put/${idbox}`, {
+    await fetch(`${url}api/items/put/${idbox}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -484,7 +472,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
  }
 
  async function delete_item(idbox) {
-    await fetch(`http://localhost:5000/api/items/delete/${idbox}`, {
+    await fetch(`${url}api/items/delete/${idbox}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -494,7 +482,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
  }
 
  async function getAlltodolist(month, year) {
-    let todolist = await fetch(`http://localhost:5000/api/items/get/${id_user}`, {
+    let todolist = await fetch(`${url}api/items/get/${id_user}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -543,8 +531,12 @@ async function createuser(SignIn_Username, SignIn_Password) {
     }
  })
 
+function openForm() {
+    LoginForm.style.display = "block";
+}
+  
 function closeForm() {
-    LoginForm.remove()
+    LoginForm.style.display = "none";
     calendar.style.display = "flex";
 }
 
