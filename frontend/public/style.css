@@ -167,7 +167,7 @@ table{
   text-align: center;
   color: var(--white);
   font-weight: bold;
-  
+  border: none;
   bottom: 5px;
   border-radius: 50%;
   font-size: 15px;
@@ -231,6 +231,16 @@ font-size: 200%;
 color: var(--color-txt);
 padding-top: 20px;
 padding-bottom: 20px;
+font-weight: bold;
+}
+
+#To-Do-word {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+#CurrentDayIndicate {
+  font-size: 75%;
 }
 
 .List {
@@ -314,6 +324,30 @@ padding-bottom: 20px;
   margin-left: 5%;
   margin-top: 5%;
   }
+
+  #todo-listAddButton {
+    background-color: #653db4;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+  }
+  #todo-listAddButton {
+    background-color: #653db4;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+  }
+  #DeleteData {
+    background-color: #653db4;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+  }
   buttom
   {
   position: absolute;
@@ -333,7 +367,6 @@ padding-bottom: 20px;
   padding: 10px 10px;
   border: none;
   cursor: pointer;
-  opacity: 0.8;
   position: fixed;
   top: 40px;
   right: 28px;
