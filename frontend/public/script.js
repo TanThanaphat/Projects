@@ -16,7 +16,9 @@ let SelectedBoxID = null;
 
 let CurrentMonthtdElements = [];
 
-let CurrentData;
+let CurrentData = [];
+
+let CurrentUsername = null;
 
 const loginStatus = document.querySelector("#loginStatus")
 
@@ -41,7 +43,7 @@ let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
 
 let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
 
-let TaskAddEnable = false
+let TaskAddEnable = true
 
 DeleteData.addEventListener("click", () => {
     if (TaskAddEnable == true){
@@ -59,20 +61,18 @@ DeleteData.addEventListener("click", () => {
 })
 
 function FindSelectedDate_Data(){
-    if (CurrentData != null){
-        console.log(CurrentData, CurrentData.length);
-        if (CurrentData.length != 0){
-            for (let i = 0; i < CurrentData.length; i++){
-                if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
-                    console.log(CurrentData[i].todo)
-                    SelectedBoxID = CurrentData[i]._id
-                    return CurrentData[i].todo
-                }
+    console.log(CurrentData)
+    if (CurrentData != null && CurrentData.length != 0){
+        for (let i = 0; i < CurrentData.length; i++){
+            if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                console.log(CurrentData[i].todo)
+                if (CurrentUsername != null) SelectedBoxID = CurrentData[i]._id;
+                return CurrentData[i].todo
             }
-            console.log("None")
-            SelectedBoxID = null
-            return null;
         }
+        console.log("None")
+        if (CurrentUsername != null) SelectedBoxID = null;
+        return null;
     }
 }
 
@@ -124,16 +124,38 @@ TodoListAdd_Button.addEventListener("click", () => {
                 console.log("Added value :", NewTask)
                 console.log("Added to box id :", SelectedBoxID)
 
-                if (SelectedBoxID != null){
-                    update_item(SelectedBox_ArrayData, NewTask, SelectedBoxID)
+                if (CurrentUsername != null){
+                    if (SelectedBoxID != null){
+                        update_item(SelectedBox_ArrayData, NewTask, SelectedBoxID)
+                    } else {
+                        createitem(CurrentClickedDay, CurrentMonth, year, NewTask)
+                        CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData_Marked"
+                    }
+    
+                    setTimeout(function(){
+                        LoadCurrentUserData()
+                    }, 500)
                 } else {
-                    createitem(CurrentClickedDay, CurrentMonth, year, NewTask)
-                    CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData_Marked"
+                    let DateData = FindSelectedDate_Data()
+                    console.log(DateData)
+                    if (DateData == null){
+                        CurrentData[CurrentData.length] = {
+                            day: CurrentClickedDay,
+                            month: CurrentMonth,
+                            year: year,
+                            todo: [NewTask]
+                        }
+                        CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData_Marked"
+                    } else {
+                        for (let i = 0; i < CurrentData.length; i++){
+                            if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                                DateData[DateData.length] = NewTask;
+                                CurrentData[i].todo = DateData;
+                                break;
+                            }
+                        }
+                    }
                 }
-
-                setTimeout(function(){
-                    LoadCurrentUserData()
-                }, 500)
             }
         })
     }
@@ -160,8 +182,6 @@ function OnLoadListOfDay(){
             AddTask(SelectedBox_ArrayData[j])
         }
     }
-
-    TaskAddEnable = true
 }
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
     CurrentMonthtdElements = []
@@ -198,9 +218,11 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
 
                 currentDayBox.style.cursor = "pointer"
                 currentDayBox.addEventListener("click", () => {
-                    console.log(currentDay, currentDayBox.className)
-                    CurrentClickedDay = currentDay
-                    OnLoadListOfDay()
+                    if (TaskAddEnable == true){
+                        console.log(currentDay, currentDayBox.className)
+                        CurrentClickedDay = currentDay
+                        OnLoadListOfDay()
+                    }
                 })
                 currentDayBox.addEventListener("mousedown", () => {
                     currentDayBox.style.opacity = 0.6
@@ -209,11 +231,11 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
                     currentDayBox.style.opacity = 1
                 })
                 currentDayBox.addEventListener("mouseover", () => {
-                    console.log("mouse enter", currentDayBox.style.height, currentDayBox.style.width)
+                    /* console.log("mouse enter", currentDayBox.style.height, currentDayBox.style.width) */
                     currentDayBox.style.opacity = 0.8
                 })
                 currentDayBox.addEventListener("mouseout", () => {
-                    console.log("mouse left", currentDay)
+                    /* console.log("mouse left", currentDay) */
                     currentDayBox.style.opacity = 1
                 })
 
@@ -224,6 +246,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
                 if (isstart == true){
                     if (++n > days) n = 1;
                     currentDayBox.innerText = n;
+                    currentDayBox.className = "OtherMonth"
                 }
             }
         }
@@ -237,7 +260,8 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
     if (mbefore < 1) mbefore = 12; 
     let mbefore_days = getDaysAmount(mbefore, christyear)
     for (let i = mbefore_days - currentDayOrder; i < mbefore_days; i++){
-        TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1;
+        TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1
+        TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].className = "OtherMonth"
     }
 
     LoadCurrentMonth_UserData()
@@ -289,10 +313,10 @@ function ChangeMonth(status){
 }
 
 leftArrow.addEventListener("click", () => {
-    ChangeMonth(-1)
+    if (TaskAddEnable == true) ChangeMonth(-1)
 })
 rightArrow.addEventListener("click", () => {
-    ChangeMonth(1)
+    if (TaskAddEnable == true) ChangeMonth(1)
 })
 
 ChangeMonth(1)
@@ -358,6 +382,9 @@ LoginButton.addEventListener('click', () => {
                     console.log(id_user)
                     closeForm()
                     LoadCurrentUserData()
+
+                    CurrentUsername = Username
+                    document.querySelector(".open-button").innerHTML = CurrentUsername
                 } else {
                     LoginErrorDisplay("Incorrect password or username", 2)
 
