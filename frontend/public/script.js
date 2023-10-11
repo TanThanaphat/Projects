@@ -84,6 +84,7 @@ TodoListAdd_Button.addEventListener("click", () => {
 
         let AddButton = document.createElement("button")
         AddButton.innerText = "Add"
+        AddButton.id = "task-addButton"
         document.querySelector("#todo-listAddButton").parentElement.appendChild(AddButton)
 
         let TaskName_Input = document.createElement("input")
@@ -94,6 +95,7 @@ TodoListAdd_Button.addEventListener("click", () => {
 
         let CancelButton = document.createElement("button")
         CancelButton.innerText = "Cancel"
+        CancelButton.id = "task-cancelButton"
         CancelButton.style = "margin-left: 2%"
         document.querySelector("#todo-listAddButton").parentElement.appendChild(CancelButton)
         
@@ -112,7 +114,7 @@ TodoListAdd_Button.addEventListener("click", () => {
             let NewTask = TaskName_Input.value
             if (NewTask.length > 0){
                 reset()
-                
+
                 let newTask = document.createElement("p")
                 newTask.className = "Task"
                 newTask.innerText = NewTask
