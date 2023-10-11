@@ -34,11 +34,12 @@ const LoginHeading = document.querySelector("#LoginHeading")
 
 const DeleteData = document.querySelector("#DeleteData")
 
+const Todolist_TableBody = document.querySelector(".todobody")
+
 let ButtonState = false;
 
 let id_user = null;
 
-let TodoList_Div = document.querySelector(".List")
 let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
 
 let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
@@ -91,7 +92,7 @@ TodoListAdd_Button.addEventListener("click", () => {
         
         TaskName_Input.placeholder = "Enter your task"
         TaskName_Input.id = "#TaskName-Input"
-        TodoList_Div.appendChild(TaskName_Input)
+        Todolist_TableBody.appendChild(TaskName_Input)
 
         let CancelButton = document.createElement("button")
         CancelButton.innerText = "Cancel"
@@ -115,11 +116,7 @@ TodoListAdd_Button.addEventListener("click", () => {
             if (NewTask.length > 0){
                 reset()
 
-                let newTask = document.createElement("p")
-                newTask.className = "Task"
-                newTask.innerText = NewTask
-
-                TodoList_Div.appendChild(newTask)
+                AddNewTask(NewTask)
 
                 console.log("Added value :", NewTask)
                 console.log("Added to box id :", SelectedBoxID)
@@ -161,25 +158,34 @@ TodoListAdd_Button.addEventListener("click", () => {
     }
 })
 
+function AddNewTask(ListName){
+    let newTableRow = document.createElement("tr")
+    newTableRow.className = "todolist"
+
+    let newTableData = document.createElement("td")
+    newTableData.className = "List"
+
+    let newTask = document.createElement("p")
+    newTask.className = "Task"
+    newTask.innerText = ListName
+
+    newTableData.appendChild(newTask)
+    newTableRow.appendChild(newTableData)
+
+    Todolist_TableBody.appendChild(newTableRow)
+}
+
 function OnLoadListOfDay(){
     CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
-    const TasksLength = TodoList_Div.children.length
+    const TasksLength = Todolist_TableBody.children.length
     for (let i = 0; i < TasksLength; i++){
-        TodoList_Div.children[0].remove()
+        Todolist_TableBody.children[0].remove()
     }
     
     SelectedBox_ArrayData = FindSelectedDate_Data();
     if (SelectedBox_ArrayData != null){       
-        function AddTask(TaskName){
-            let newTask = document.createElement("p")
-            newTask.className = "Task"
-            newTask.innerText = TaskName
-
-            TodoList_Div.appendChild(newTask)
-        }
-
         for (let j = 0; j < SelectedBox_ArrayData.length; j++){
-            AddTask(SelectedBox_ArrayData[j])
+            AddNewTask(SelectedBox_ArrayData[j])
         }
     }
 }
