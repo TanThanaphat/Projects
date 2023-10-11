@@ -246,6 +246,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
                 if (isstart == true){
                     if (++n > days) n = 1;
                     currentDayBox.innerText = n;
+                    currentDayBox.className = "OtherMonth"
                 }
             }
         }
@@ -259,7 +260,8 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
     if (mbefore < 1) mbefore = 12; 
     let mbefore_days = getDaysAmount(mbefore, christyear)
     for (let i = mbefore_days - currentDayOrder; i < mbefore_days; i++){
-        TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1;
+        TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].innerText = i + 1
+        TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].className = "OtherMonth"
     }
 
     LoadCurrentMonth_UserData()
