@@ -1,22 +1,19 @@
 :root {
-  /*--dark-body: #4d4c5a;*/
+  --dark-popup: #4d4c5a;
   --dark-body: #25263a;
   --dark-main: #141529;
   --dark-second: #79788c;
   --dark-hover: #323048;
   --dark-text: #f8fbff;
+  --dark-date: #79788c;
 
+  --light-popup: #fff;
   --light-body: #f3f8fe;
   --light-main: #fdfdfd;
   --light-second: #c3c2c8;
   --light-hover: #edf0f5;
   --light-text: #151426;
-
-  --color-body: #FFFFFF;
-  --color-main: #F4F7FF;
-  --color-second: #c3c2c8;
-  --color-hover: #0068FF;
-  --color-text: #000000;
+  --light-date: #e6eaf0;
 
   --blue: #0000ff;
   --white: #fff;
@@ -27,27 +24,23 @@
 }
 
 .dark {
+  --popup: var(--dark-popup);
   --bg-body: var(--dark-body);
   --bg-main: var(--dark-main);
   --bg-second: var(--dark-second);
   --color-hover: var(--dark-hover);
   --color-txt: var(--dark-text);
+  --color-date: var(--dark-date);
 }
 
 .light {
+  --popup: var(--light-popup);
   --bg-body: var(--light-body);
   --bg-main: var(--light-main);
   --bg-second: var(--light-second);
   --color-hover: var(--light-hover);
   --color-txt: var(--light-text);
-}
-
-.color {
-  --bg-body: var(--color-body);
-  --bg-main: var(--color-main);
-  --bg-second: var(--color-second);
-  --color-hover: var(--color-hover);
-  --color-txt: var(--color-text);
+  --color-date: var(--light-date);
 }
 
 html,
@@ -55,6 +48,9 @@ body {
     font-family: var(--font-family);
     background-color: var(--bg-body);
     color: var(--color-txt);
+}
+p{
+  margin: 0;
 }
 
 
@@ -65,9 +61,31 @@ body {
   text-align: center;
   border-bottom: solid;
   color: var(--color-txt);
-  padding-top: 0px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
+/*.navbar {
+  padding: 10px;
+  display :inline
+  /* background-color:rgb(182, 182, 182); 
+}*/
+
+
+
+.wrapper{
+  display: flex;
+  box-sizing: border-box;
+  background-color: var(--bg-body);
+}
+
+
+.col-1{
+  background-color: var(--bg-body);
+  width: 50%;
+  align-items: center;
+  height: auto;
+  margin: auto;
+  }
 
 .light table{
   box-shadow: var(--shadow);
@@ -77,43 +95,6 @@ body {
   font-size: 30px;
   font-weight: bold;
   color: var(--color-txt);
-}
-.wrapper{
-  display: flex;
-  box-sizing: border-box;
-  background-color: var(--bg-body);
-}
-.col-2{
-background-color: var(--bg-main);
-width: 30%;
-
-}
-.col-1{
-background-color: var(--bg-main);
-width: 45%;
-}
-
-.col-1{
-width: 55%;
-align-items: center;
-height: auto;
-margin: auto;
-}
-.top{
-text-align: center;
-background-color: var(--bg-main);
-margin: 0%;
-font-size: 200%;
-color: var(--color-txt);
-}
-
-p{
-  margin: 0;
-}
-
-.List {
-  padding-left: 20px;
-  padding-right: 20px;
 }
 
 table {
@@ -177,8 +158,8 @@ tbody tr td{
 
 table{
   background-color: var(--bg-main);
+  
 }
-
 
 #left-arrow, #right-arrow{
   width: 30px;
@@ -217,25 +198,144 @@ table{
   font-weight: 600;
 }
 
-.navbar {
-  padding: 10px;
-  display :inline
-  /* background-color:rgb(182, 182, 182); */
+.Month_TableData{
+  border:1px solid var(--dark-main); 
+   background-color:var(--color-date);
+ }
+ .Month_TableData_Marked{
+   border:1px solid var(--dark-main); 
+   background-color: #0068ff;
+ }
+
+
+.col-2{
+background-color: var(--bg-body);
+width: 40%;
 }
-* {box-sizing: border-box;}
+
+.todo {
+  border-radius: 30px;
+  background-color: var(--bg-main);
+  width: 550px;
+  height: max-content;
+}
+
+.todolist {
+  height: fit-content;  
+}
+
+.top{
+text-align: center;
+margin: 0%;
+font-size: 200%;
+color: var(--color-txt);
+padding-top: 20px;
+padding-bottom: 20px;
+}
+
+.List {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: left;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: var(--color-txt);
+  margin-left: 20px;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 30%;
+  background-color: var(--color-hover);
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+  background-color: var(--bg-second);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+  background-color: var(--color-txt);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+  display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--bg-main);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  }
+  .List{
+  z-index: index 0;
+  margin-left: 5%;
+  margin-top: 5%;
+  }
+  buttom
+  {
+  position: absolute;
+  }
+
+ *{box-sizing: border-box;}
+
+
+
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 
 .open-button {
   background-color: #653db4;
-  border-radius: 10%;
+  border-radius: 20px;
   color: white;
   padding: 10px 10px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
   position: fixed;
-  bottom: 560px;
+  top: 40px;
   right: 28px;
   width: 100px;
 }
@@ -245,19 +345,18 @@ table{
   margin: auto;
   width : 500px;
   z-index: 100;
-  
+  color: var(--color-txt)
 }
 
 /* Add styles to the form container */
 .form-container {
   position: fixed;
   border-radius: 6%;
-  background-image: linear-gradient(rgb(204, 204, 204), rgb(255, 255, 255));
   max-width: 700px;
   padding: 20px;
   display: flex;
   display: center;
-  background-color: white;
+  background-color: var(--color-hover);
   animation: fadeIn 1s;
 }
 .left-side{
@@ -282,19 +381,19 @@ table{
   padding: 15px;
   margin: 5px 0 22px 0;
   border: none;
-  background: #f1f1f1;
+  background: var(--popup);
 }
 
 /* When the inputs get focus, do something */
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-image: linear-gradient(rgb(255, 255, 255), rgb(240, 240, 240));
+  background-color: var(--bg-second);
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #4eeb68;
-  color: rgb(60, 60, 60);
+  background-color: #653db4;
+  color: white;
   padding: 16px 20px;
   border-radius: 10%;
   transition: 0.6s;
@@ -307,7 +406,7 @@ table{
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-  background-color: rgb(196, 196, 196);
+  background-color: var(--bg-second)
 }
 
 /* Add some hover effects to buttons */
@@ -330,7 +429,7 @@ table{
 }
 .signin{
   font-size: 14px;
-  color: rgb(106, 106, 106);
+  color: var(--color-txt);
   margin-top: 0px;
   padding-left: 102px;
   cursor: pointer;
@@ -338,89 +437,4 @@ table{
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
-}
-/* The container */
-.container {
-display: block;
-position: relative;
-padding-left: 35px;
-margin-bottom: 12px;
-cursor: pointer;
-font-size: 22px;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-color: var(--color-txt);
-}
-
-/* Hide the browser's default checkbox */
-.container input {
-position: absolute;
-opacity: 0;
-cursor: pointer;
-height: 0;
-width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-position: absolute;
-top: 0;
-left: 0;
-height: 25px;
-width: 25px;
-background-color: var(--color-hover);
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-background-color: var(--bg-second);
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-background-color: var(--color-txt);
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-content: "";
-position: absolute;
-display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-left: 9px;
-top: 5px;
-width: 5px;
-height: 10px;
-border: solid var(--bg-main);
-border-width: 0 3px 3px 0;
--webkit-transform: rotate(45deg);
--ms-transform: rotate(45deg);
-transform: rotate(45deg);
-}
-.List{
-z-index: index 0;
-margin-left: 5%;
-margin-top: 5%;
-}
-buttom
-{
-position: absolute;
-}
-.Month_TableData{
- border:1px solid var(--dark-main); 
-  background-color: #79788c;
-}
-.Month_TableData_Marked{
-  border:1px solid var(--dark-main); 
-  background-color: #0068ff;
 }

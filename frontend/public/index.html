@@ -7,9 +7,9 @@
     </head>
     <body class="dark">
         <nav style="text-align: center" class="navbar">
+            <button class="open-button" onclick="openForm()">Login</button>
             <h1 id="heading" style="font-size: 50;">Planner</h1>
         </nav>
-        <button class="open-button" onclick="openForm()">Login</button>
         <div class="form-popup" id="LoginForm">
             <div class="form-container">
                 <div style="border-right-style:groove;" class="left-side">
@@ -21,9 +21,9 @@
                         <input type="password" placeholder="Enter Password" id="psw" required>
                         <p id="loginStatus" style="color: red; display: none;">Incorrect password or username</p>
                         <br>
-                        <button style="border-radius: 10px;" class="btn" id="loginbtn">Login</button>
-                        <button style="border-radius: 10px;" class="btn cancel" id="guestbtn" onclick="closeForm()">Guest</button>
-                        <button style="border-radius: 10px; display: none;" type="button" class="btn signin" id="signinnew" >Sign Up</button>
+                        <button style="border-radius: 20px;" class="btn" id="loginbtn">Login</button>
+                        <button style="border-radius: 20px;" class="btn cancel" id="guestbtn" onclick="closeForm()">Guest</button>
+                        <button style="border-radius: 20px; display: none;" type="button" class="btn signin" id="signinnew" >Sign Up</button>
                         <p style="margin: auto;" class = "signin" id="signinbtn">Sign Up</p>
                         <p style="display: none;" class = "signin" id="gologin">Log in</p>
                 </div>
@@ -62,38 +62,50 @@
                 </div>
         
                 <div class="col-2">
-                    <div class="top"> 
-                        <p>
-                            To-Do lists
-                        </p>
-                        <p id="CurrentDayIndicate">-</p>
-                    </div>
-                    <div class="List">
-                        <label class="container">One
-                            <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                          </label>
+                    <table class="todo">
+                        <thead>
+                            <tr>
+                                <td colspan="2" class="top"> 
+                                    <p>
+                                        To-Do lists
+                                    </p>
+                                    <p id="CurrentDayIndicate">-</p>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="todobody">
+                            <tr class="todolist">
+                                <td class="List">
+                                    <label class="container">One
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                    </label>
                           
-                          <label class="container">Two
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                          </label>
+                                    <label class="container">Two
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
                           
-                          <label class="container">Three
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                          </label>
+                                    <label class="container">Three
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
                           
-                          <label class="container">Four
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                          </label>
-                             
-                    </div>
-                    <div class="button">
-                        <button id="todo-listAddButton"> click me!</button>
+                                    <label class="container">Four
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="button">
+                                    <button id="todo-listAddButton"> click me!</button>
+                                </td>
+                            </tr>
 
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
            
             
