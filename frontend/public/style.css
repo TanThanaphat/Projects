@@ -307,9 +307,10 @@ font-weight: bold;
   border: none;
   cursor: pointer;
   position: fixed;
-  top: 40px;
+  top: 30xpx;
   right: 28px;
-  width: 100px;
+  width: 200px;
+  height: 50px;
 }
 
 /* The popup form - hidden by default */
