@@ -57,6 +57,7 @@ p{
 #heading{
   text-align: center;
   border-bottom: solid;
+  font-weight: bold;
   color: var(--color-txt);
   padding-top: 20px;
   padding-bottom: 20px;
@@ -119,6 +120,7 @@ tbody tr:last-child td:last-child {
 thead tr td{
   align-items: center;
   font-size: 19px;
+  padding-top: 25px;
 }
 
 thead tr .months{
@@ -157,15 +159,9 @@ table{
   background-color: var(--bg-main);
 }
 
-.month-heading-box {
-  width: 300px;
-  align-items: center;
-}
-
 #left-arrow, #right-arrow{
   width: 30px;
   height: 30px;
-  text-align: center;
   color: var(--white);
   font-weight: bold;
   border: none;
@@ -176,17 +172,9 @@ table{
   background-color: var(--bg-main);
 }
 
-#left-arrow{
-  margin-right: 5px;
-}
-
 #left-arrow:hover{
   background-color: var(--blue);
   color: var(--white);
-}
-
-#right-arrow{
-  margin-left: 5px;
 }
 
 #right-arrow:hover{
@@ -202,11 +190,21 @@ table{
 .Month_TableData{
   border:1px solid var(--dark-main); 
    background-color:var(--color-date);
+   text-align: left;
+   padding: 2%;
+   vertical-align: top;
  }
  .Month_TableData_Marked{
    border:1px solid var(--dark-main); 
    background-color: #0068ff;
  }
+
+ .OtherMonth {
+  text-align: left;
+   padding: 2%;
+   vertical-align: top;
+ }
+
 
 
 .col-2{
@@ -232,7 +230,6 @@ font-size: 200%;
 color: var(--color-txt);
 padding-top: 20px;
 padding-bottom: 20px;
-font-weight: bold;
 }
 
 #To-Do-word {
@@ -241,7 +238,7 @@ font-weight: bold;
 }
 
 #CurrentDayIndicate {
-  font-size: 75%;
+  font-size: 60%;
 }
 
 .List {
@@ -279,8 +276,8 @@ font-weight: bold;
     border: none;
   }
   #todo-listAddButton{
-    margin-right: 65%;
-    width: 75px;
+    margin-right: 50%;
+    width: 55px;
 
   }
   #TaskName-Input {
@@ -292,7 +289,7 @@ font-weight: bold;
   }
   #DeleteData {
     margin-left: 85%;
-    width: 90px;
+    width: 70px;
    
     border-radius: 50%;
     color: white;
