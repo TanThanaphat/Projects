@@ -54,9 +54,6 @@ p{
 }
 
 
-
-
-
 #heading{
   text-align: center;
   border-bottom: solid;
@@ -64,16 +61,16 @@ p{
   padding-top: 20px;
   padding-bottom: 20px;
 }
-/*.navbar {
+.navbar {
   padding: 10px;
-  display :inline
-  /* background-color:rgb(182, 182, 182); 
-}*/
+  display : center;
+  margin : 2px;
+}
 
 
 
 .wrapper{
-  display: flex;
+  display: none;
   box-sizing: border-box;
   background-color: var(--bg-body);
 }
@@ -277,12 +274,17 @@ font-weight: bold;
   margin-top: 5%;
   }
 
-  #todo-listAddButton, #task-addButton, #task-cancelButton {
+   #task-addButton, #task-cancelButton {
     background-color: #653db4;
     border-radius: 20px;
     color: white;
     padding: 10px 10px;
     border: none;
+  }
+  #todo-listAddButton{
+    margin-right: 50%;
+    width: 75px;
+
   }
   #TaskName-Input {
     width: 100%;
@@ -292,9 +294,9 @@ font-weight: bold;
     background: var(--popup);
   }
   #DeleteData {
-    background-color: #653db4;
-    width: 30px;
-    height: 30px;
+    margin-left: 85%;
+    width: 90px;
+   
     border-radius: 50%;
     color: white;
     padding: 10px 10px;
@@ -318,10 +320,7 @@ font-weight: bold;
   color: white;
   padding: 10px 10px;
   border: none;
-  cursor: pointer;
-  position: fixed;
-  top: 30xpx;
-  right: 28px;
+  margin-left: 87%;
   width: 200px;
   height: 50px;
 }

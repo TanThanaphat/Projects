@@ -542,6 +542,7 @@ function openForm() {
   
 function closeForm() {
     LoginForm.style.display = "none";
+    calendar.style.display = "flex";
 }
 
 function gotoSignIn(){
