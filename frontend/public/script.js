@@ -10,11 +10,15 @@ let m = -1;
 let year = 2566;
 
 let CurrentMonth;
+let CurrentClickedDay;
+let SelectedBox_ArrayData;
+let SelectedBoxID = null;
+
 let CurrentMonthtdElements = [];
 
 let CurrentData;
 
-let LoginPopup = document.querySelector("#myPopup")
+const loginStatus = document.querySelector("#loginStatus")
 
 const LoginForm = document.getElementById('LoginForm')
 const GuestButton = document.getElementById('guestbtn');
@@ -24,19 +28,155 @@ const SignInToggle = document.getElementById('signinbtn');
 const LoginButton = document.querySelector("#loginbtn");
 const SignInButton = document.getElementById('signinnew');
 
+const LoginHeading = document.querySelector("#LoginHeading")
+
+const DeleteData = document.querySelector("#DeleteData")
+
 let ButtonState = false;
 
 let id_user = null;
 
-function myFunction() {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-  }
-function verified() {
-    var sucess = document.getElementById("myPopup");
-    popup.classList.toggle("show");
+let TodoList_Div = document.querySelector(".List")
+let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
+
+let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
+
+let TaskAddEnable = false
+
+DeleteData.addEventListener("click", () => {
+    if (TaskAddEnable == true){
+        if (SelectedBoxID != null){
+            TaskAddEnable = false;
+            delete_item(SelectedBoxID)
+    
+            setTimeout(function(){
+                LoadCurrentUserData()
+                CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
+                TaskAddEnable = true;
+            }, 1000)
+        }
+    }
+})
+
+function FindSelectedDate_Data(){
+    if (CurrentData != null){
+        console.log(CurrentData, CurrentData.length);
+        if (CurrentData.length != 0){
+            for (let i = 0; i < CurrentData.length; i++){
+                if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                    console.log(CurrentData[i].todo)
+                    SelectedBoxID = CurrentData[i]._id
+                    return CurrentData[i].todo
+                }
+            }
+            console.log("None")
+            SelectedBoxID = null
+            return null;
+        }
+    }
 }
 
+TodoListAdd_Button.addEventListener("click", () => {
+    if (TaskAddEnable == true){
+        TaskAddEnable = false;
+
+        TodoListAdd_Button.style.display = "none"
+
+        let AddButton = document.createElement("button")
+        AddButton.innerText = "Add"
+        document.querySelector("#todo-listAddButton").parentElement.appendChild(AddButton)
+
+        let TaskName_Input = document.createElement("input")
+        
+        TaskName_Input.placeholder = "Enter your task"
+        TaskName_Input.id = "#TaskName-Input"
+        TodoList_Div.appendChild(TaskName_Input)
+
+        let CancelButton = document.createElement("button")
+        CancelButton.innerText = "Cancel"
+        CancelButton.style = "margin-left: 2%"
+        document.querySelector("#todo-listAddButton").parentElement.appendChild(CancelButton)
+        
+        function reset(){
+            AddButton.remove()
+            CancelButton.remove()
+            TaskName_Input.remove()
+            TodoListAdd_Button.style.display = null;
+            TaskAddEnable = true
+        }
+        CancelButton.addEventListener("click", () => {
+            reset()
+        })
+
+        AddButton.addEventListener("click", () => {
+            let NewTask = TaskName_Input.value
+            if (NewTask.length > 0){
+                let newLabel = document.createElement("label")
+                newLabel.className = "container"
+                newLabel.innerText = NewTask
+
+                let InputCheckBox = document.createElement("input")
+                InputCheckBox.type = "checkbox"
+                let InputSpan = document.createElement("span")
+                InputSpan.className = "checkmark"
+
+                newLabel.appendChild(InputCheckBox)
+                newLabel.appendChild(InputSpan)
+
+                TodoList_Div.appendChild(newLabel)
+
+                console.log("Added value :", NewTask)
+                console.log("Added to box id :", SelectedBoxID)
+
+                if (SelectedBoxID != null){
+                    update_item(SelectedBox_ArrayData, NewTask, SelectedBoxID)
+                } else {
+                    createitem(CurrentClickedDay, CurrentMonth, year, NewTask)
+                    CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData_Marked"
+                }
+
+                setTimeout(function(){
+                    LoadCurrentUserData()
+
+                    reset()
+                }, 500)
+            }
+        })
+    }
+})
+
+function OnLoadListOfDay(){
+    CurrentDayIndicate.innerText = `Selected day : ${CurrentClickedDay} ${months[CurrentMonth - 1]} ${year}`
+    const TasksLength = TodoList_Div.children.length
+    for (let i = 0; i < TasksLength; i++){
+        TodoList_Div.children[0].remove()
+    }
+    
+    SelectedBox_ArrayData = FindSelectedDate_Data();
+    if (SelectedBox_ArrayData != null){       
+        function AddTask(TaskName){
+            let newLabel = document.createElement("label")
+            newLabel.className = "container"
+            newLabel.innerText = TaskName
+
+            let InputCheckBox = document.createElement("input")
+            InputCheckBox.type = "checkbox"
+            let InputSpan = document.createElement("span")
+            InputSpan.className = "checkmark"
+
+            newLabel.appendChild(InputCheckBox)
+            newLabel.appendChild(InputSpan)
+
+            TodoList_Div.appendChild(newLabel)
+        }
+
+        for (let j = 0; j < SelectedBox_ArrayData.length; j++){
+            AddTask(SelectedBox_ArrayData[j])
+        }
+    }
+
+    TaskAddEnable = true
+}
 function RefreshCalendar(days, FirstDay, realmonth, christyear){
     CurrentMonthtdElements = []
 
@@ -60,6 +200,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
     for (let i = 0; i < 6; i++){
         let TableRow = TableBody.children[i]
         for (let j = 0; j < 7; j++){
+            const currentDayBox = TableRow.children[j]
             
             currentDayOrder = j;
             currentDayOrder++;
@@ -67,20 +208,41 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
             
             if (currentDayOrder == FirstDay) isstart = true;
             if (daycount < days && isstart == true){
-                TableRow.children[j].className = "Month_TableData"
+                const currentDay = ++daycount;
 
-                TableRow.children[j].innerText = ++n;
-                CurrentMonthtdElements[CurrentMonthtdElements.length] = TableRow.children[j]
-                daycount++;
+                currentDayBox.style.cursor = "pointer"
+                currentDayBox.addEventListener("click", () => {
+                    console.log(currentDay, currentDayBox.className)
+                    CurrentClickedDay = currentDay
+                    OnLoadListOfDay()
+                })
+                currentDayBox.addEventListener("mousedown", () => {
+                    currentDayBox.style.opacity = 0.6
+                })
+                currentDayBox.addEventListener("mouseup", () => {
+                    currentDayBox.style.opacity = 1
+                })
+                currentDayBox.addEventListener("mouseover", () => {
+                    console.log("mouse enter", currentDayBox.style.height, currentDayBox.style.width)
+                    currentDayBox.style.opacity = 0.8
+                })
+                currentDayBox.addEventListener("mouseout", () => {
+                    console.log("mouse left", currentDay)
+                    currentDayBox.style.opacity = 1
+                })
+
+                currentDayBox.className = "Month_TableData"
+                currentDayBox.innerText = ++n;
+                CurrentMonthtdElements[CurrentMonthtdElements.length] = currentDayBox
             } else {
                 if (isstart == true){
                     if (++n > days) n = 1;
-                    TableRow.children[j].innerText = n;
+                    currentDayBox.innerText = n;
                 }
             }
         }
     }
-    console.log(CurrentMonthtdElements)
+    /* console.log(CurrentMonthtdElements)
     /* add day number for before and next month */
     currentDayOrder = FirstDay
     if (currentDayOrder == 0) currentDayOrder = 7;
@@ -149,61 +311,6 @@ rightArrow.addEventListener("click", () => {
 
 ChangeMonth(1)
 
-let Task_AddingDebounce = false
-let TodoList_Div = document.querySelector(".List")
-let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
-
-TodoListAdd_Button.addEventListener("click", () => {
-    if (Task_AddingDebounce == false){
-        Task_AddingDebounce = true;
-
-        TodoListAdd_Button.style = "display: none"
-
-        let AddButton = document.createElement("button")
-        AddButton.innerText = "Add"
-        document.querySelector("#todo-listAddButton").parentElement.appendChild(AddButton)
-
-        let TaskName_Input = document.createElement("input")
-        
-        TaskName_Input.placeholder = "Enter your task"
-        TaskName_Input.id = "#TaskName-Input"
-        TodoList_Div.appendChild(TaskName_Input)
-
-        let CancelButton = document.createElement("button")
-        CancelButton.innerText = "Cancel"
-        CancelButton.style = "margin-left: 2%"
-        document.querySelector("#todo-listAddButton").parentElement.appendChild(CancelButton)
-        
-        function reset(){
-            AddButton.remove()
-            CancelButton.remove()
-            TaskName_Input.remove()
-            TodoListAdd_Button.style.display = null;
-            Task_AddingDebounce = false
-        }
-        CancelButton.addEventListener("click", () => {
-            reset()
-        })
-
-        AddButton.addEventListener("click", () => {
-            let newLabel = document.createElement("label")
-            newLabel.className = "container"
-            newLabel.innerText = TaskName_Input.value
-
-            let InputCheckBox = document.createElement("input")
-            InputCheckBox.type = "checkbox"
-            let InputSpan = document.createElement("span")
-            InputSpan.className = "checkmark"
-
-            newLabel.appendChild(InputCheckBox)
-            newLabel.appendChild(InputSpan)
-
-            TodoList_Div.appendChild(newLabel)
-            reset()
-        })
-    }
-})
-
 function LoadCurrentMonth_UserData(){
     if (CurrentData != null){
         console.log(CurrentData, CurrentData.length);
@@ -211,18 +318,24 @@ function LoadCurrentMonth_UserData(){
             for (let i = 0; i < CurrentData.length; i++){
                 if (CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
                     const todo_Array = CurrentData[i].todo
+                    
+                    CurrentMonthtdElements[CurrentData[i].day - 1].className = "Month_TableData_Marked"
                     for (let j = 0; j < todo_Array.length; j++){
                         console.log(todo_Array[j])
-                        let newText = document.createElement("p")
+                        /* let newText = document.createElement("p")
                         newText.innerText = todo_Array[j]
                         CurrentMonthtdElements[CurrentData[i].day - 1].appendChild(newText)
+                        */
                     }
                     console.log("----------")
                 }
             }
         }
+    } else { /* For guest */
+
     }
 }
+
 function LoadCurrentUserData(){
     console.log(id_user)
     if (id_user != null){
@@ -232,6 +345,15 @@ function LoadCurrentUserData(){
                 LoadCurrentMonth_UserData()
             })
     }
+}
+
+function LoginErrorDisplay(text, duration){
+    loginStatus.innerText = text
+    loginStatus.style.display = "block"
+
+    setTimeout(function(){
+        loginStatus.style.display = "none"
+    }, duration * 1000)
 }
 
 LoginButton.addEventListener('click', () => {
@@ -251,6 +373,8 @@ LoginButton.addEventListener('click', () => {
                     closeForm()
                     LoadCurrentUserData()
                 } else {
+                    LoginErrorDisplay("Incorrect password or username", 2)
+
                     /* Incorrect Username/Password */
                 }
                 break;
@@ -278,15 +402,13 @@ async function Login(Username, Password) {
     return await s.json();
 }
 
-async function createitem() {
+async function createitem(d, m, y, newTask) {
     const body = {
-    "day": 21,
-    "month":7,
-    "year":2566,
+    "day": d,
+    "month": m,
+    "year": y,
     "id_user":id_user,
-    "todo":["กินมาม่า",
-            "ทำการบ้าน",
-            "อ่านหนังสือ"]
+    "todo":[newTask]
     };
     await fetch('http://localhost:5000/api/items/create', {
         method: "POST",
@@ -312,22 +434,20 @@ async function createuser(SignIn_Username, SignIn_Password) {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-        });
+        })
         return "Completed";
     } catch {
         return "Error"
     }
  }
 
- async function update_item() {
+ async function update_item(prevData, newTask, idbox) {
+    let DataToOverwrite = prevData
+    DataToOverwrite[DataToOverwrite.length] = newTask
     const body = {
-        "todo":["หาไรกัน",
-        "ทำไรกัน",
-        "ไม่อ่านหนังสือหรอ",
-        "546546"
-        ]
+        "todo":DataToOverwrite
     };
-    await fetch(`http://localhost:5000/api/items/put/${id_user}`, {
+    await fetch(`http://localhost:5000/api/items/put/${idbox}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -337,13 +457,12 @@ async function createuser(SignIn_Username, SignIn_Password) {
     return ;
  }
 
- async function delete_item() {
-    await fetch(`http://localhost:5000/api/items/put/${idbox}`, {
+ async function delete_item(idbox) {
+    await fetch(`http://localhost:5000/api/items/delete/${idbox}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
       });
     return ;
  }
@@ -373,8 +492,9 @@ async function createuser(SignIn_Username, SignIn_Password) {
                     console.log("No account registered yet")
                     createuser(Username, Password)
                         .then(function(status){
+                            console.log(status)
                             if (status == "Completed"){
-                                
+                                gotoLogin()
                             }
                         })
                     /* id_user = result[key]
@@ -383,6 +503,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
                     LoadCurrentUserData()
                     */
                 } else {
+                    LoginErrorDisplay("There is already an account with this username.", 3)
                     console.log("There is already account registed")
                     /* Incorrect Username/Password */
                 }
@@ -403,35 +524,25 @@ function openForm() {
 function closeForm() {
     LoginForm.style.display = "none";
 }
+
+function gotoSignIn(){
+    LoginHeading.innerText = "Sign Up"
+    GuestButton.style.display = "none";
+    LoginButton.style.display = "none";
+    SignInToggle.style.display = "none";
+    SignInButton.style.display = "block";
+    LoginToggle.style.display = "block";
+}
+
+function gotoLogin(){
+    LoginHeading.innerText = "Login"
+    GuestButton.style.display = "block";
+    LoginButton.style.display = "block";
+    SignInToggle.style.display = "block";
+    SignInButton.style.display = "none";
+    LoginToggle.style.display = "none";
+}
     
-SignInToggle.addEventListener("click", () => {
-    if (ButtonState == false){
-        ButtonState = true
+SignInToggle.addEventListener("click", gotoSignIn)
 
-        GuestButton.style.display = "none";
-        LoginButton.style.display = "none";
-        SignInToggle.style.display = "none";
-        SignInButton.style.display = "block";
-        LoginToggle.style.display = "block";
-
-        setTimeout(function(){
-            ButtonState = false
-        }, 1000)
-    }
-})
-
-LoginToggle.addEventListener("click", () => {
-    if (ButtonState == false){
-        ButtonState = true
-
-        GuestButton.style.display = "block";
-        LoginButton.style.display = "block";
-        SignInToggle.style.display = "block";
-        SignInButton.style.display = "none";
-        LoginToggle.style.display = "none";
-
-        setTimeout(function(){
-            ButtonState = false
-        }, 1000)
-    }
-})
+LoginToggle.addEventListener("click", gotoLogin)
