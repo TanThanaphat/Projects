@@ -50,11 +50,15 @@ DeleteData.addEventListener("click", () => {
     if (TaskAddEnable == true){
         if (SelectedBoxID != null){
             TaskAddEnable = false;
+
+            CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
+            for (let i = 0; i < Todolist_TableBody.children.length; i++)
+                Todolist_TableBody.children[0].remove()
+            
             delete_item(SelectedBoxID)
     
             setTimeout(function(){
                 LoadCurrentUserData()
-                CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
                 TaskAddEnable = true;
             }, 1000)
         }
