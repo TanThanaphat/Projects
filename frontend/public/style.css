@@ -286,11 +286,13 @@ padding-bottom: 20px;
     cursor: pointer;
   }
   #TaskName-Input {
-    width: 100%;
+    width: 50%;
     padding: 15px;
-    margin: 5px 0 22px 0;
+    /*margin: 5px 0 22px 0;*/
+    margin: 20px;
     border: none;
-    background: var(--popup);
+    background: var(--color-date);
+    color: white;
   }
   .DeleteTask {
     width: 56px;

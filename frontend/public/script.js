@@ -96,7 +96,7 @@ TodoListAdd_Button.addEventListener("click", () => {
         let TaskName_Input = document.createElement("input")
         
         TaskName_Input.placeholder = "Enter your task"
-        TaskName_Input.id = "#TaskName-Input"
+        TaskName_Input.id = "TaskName-Input"
         Todolist_TableBody.appendChild(TaskName_Input)
 
         let CancelButton = document.createElement("button")
