@@ -48,19 +48,33 @@ let TaskAddEnable = true
 
 DeleteData.addEventListener("click", () => {
     if (TaskAddEnable == true){
-        if (SelectedBoxID != null){
-            TaskAddEnable = false;
-
-            CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
-            for (let i = 0; i < Todolist_TableBody.children.length; i++)
-                Todolist_TableBody.children[0].remove()
-            
-            delete_item(SelectedBoxID)
+        if (CurrentUsername != null){
+            if (SelectedBoxID != null){
+                TaskAddEnable = false;
     
-            setTimeout(function(){
-                LoadCurrentUserData()
-                TaskAddEnable = true;
-            }, 1000)
+                CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
+                for (let i = 0; i < Todolist_TableBody.children.length; i++)
+                    Todolist_TableBody.children[0].remove()
+                
+                delete_item(SelectedBoxID)
+        
+                setTimeout(function(){
+                    LoadCurrentUserData()
+                    TaskAddEnable = true;
+                }, 1000)
+            }
+        } else {
+            newArray = []
+            for (let i = 0; i < CurrentData.length; i++){
+                if (CurrentData[i].day == CurrentClickedDay && CurrentData[i].month == CurrentMonth && CurrentData[i].year == year){
+                } else {
+                    newArray[newArray.length] = CurrentData[i]
+                }
+            }
+            CurrentData = newArray
+            CurrentMonthtdElements[CurrentClickedDay - 1].className = "Month_TableData"
+
+            OnLoadListOfDay()
         }
     }
 })
