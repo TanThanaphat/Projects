@@ -211,7 +211,9 @@ table{
    vertical-align: top;
  }
 
-
+.button {
+  min-width: 550px;
+}
 
 .col-2{
   background-color: var(--bg-body);
@@ -280,9 +282,11 @@ padding-bottom: 20px;
     color: white;
     padding: 10px 10px;
     border: none;
+    margin-left: -62%;
   }
+
   #todo-listAddButton{
-    margin-right: 50%;
+    margin-right: 75%;
     width: 55px;
     cursor: pointer;
   }
