@@ -1,3 +1,5 @@
+const TodayDate = new Date()
+
 let Table = document.querySelector("table")
 let TableBody = document.querySelector("tbody")
 let monthHeading = document.querySelector("#month-heading")
@@ -7,8 +9,9 @@ let rightArrow = document.querySelector("#right-arrow")
 let months = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"]
 let m = -1;
-let year = 2566;
+let year = TodayDate.getFullYear() + 543;
 
+let LoadStartMonth = true;
 let CurrentMonth;
 let CurrentClickedDay;
 let SelectedBox_ArrayData;
@@ -45,6 +48,8 @@ let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
 let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
 
 let TaskAddEnable = true
+
+console.log(TodayDate.getDate(), TodayDate.getMonth(), TodayDate.getFullYear() + 543)
 
 DeleteData.addEventListener("click", () => {
     if (TaskAddEnable == true){
@@ -383,6 +388,10 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
         TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].className = "OtherMonth"
     }
 
+    if (realmonth == TodayDate.getMonth()){
+        CurrentMonthtdElements[TodayDate.getDate() - 1].style.backgroundColor = "#835ece"
+    }
+
     LoadCurrentMonth_UserData()
 
     /* */
@@ -403,14 +412,19 @@ function getDaysAmount(realmonth, christyear){
 }
 
 function ChangeMonth(status){
-    m += status
-    if (m < 0){
-        m = 11;
-        year--;
-    }
-    if (m > 11){
-        m = 0;
-        year++;
+    if (LoadStartMonth == true){
+        LoadStartMonth = false
+        m = TodayDate.getMonth() - 1
+    } else {
+        m += status
+        if (m < 0){
+            m = 11;
+            year--;
+        }
+        if (m > 11){
+            m = 0;
+            year++;
+        }
     }
 
     monthHeading.innerHTML = months[m] + " " + year
