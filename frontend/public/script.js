@@ -667,6 +667,7 @@ async function createuser(SignIn_Username, SignIn_Password) {
 function closeForm() {
     LoginForm.remove()
     calendar.style.display = "flex";
+    opbutton.style.display = "block";
 }
 
 function gotoSignIn(){
