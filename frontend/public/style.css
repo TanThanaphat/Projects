@@ -293,6 +293,8 @@ padding-bottom: 20px;
     border: none;
     background: var(--color-date);
     color: white;
+    font-size: 15px;
+    font-family: var(--font-family);
   }
   .DeleteTask {
     width: 56px;
