@@ -414,7 +414,7 @@ function getDaysAmount(realmonth, christyear){
 function ChangeMonth(status){
     if (LoadStartMonth == true){
         LoadStartMonth = false
-        m = TodayDate.getMonth() - 1
+        m = TodayDate.getMonth()
     } else {
         m += status
         if (m < 0){
