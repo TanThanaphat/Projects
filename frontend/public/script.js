@@ -47,7 +47,7 @@ let TodoListAdd_Button = document.querySelector("#todo-listAddButton")
 
 let CurrentDayIndicate = document.querySelector("#CurrentDayIndicate")
 
-let TaskAddEnable = true
+let TaskAddEnable = false
 
 console.log(TodayDate.getDate(), TodayDate.getMonth(), TodayDate.getFullYear() + 543)
 
@@ -342,6 +342,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
 
                 currentDayBox.style.cursor = "pointer"
                 currentDayBox.addEventListener("click", () => {
+                    if (CurrentClickedDay == undefined) TaskAddEnable = true;
                     if (TaskAddEnable == true){
                         console.log(currentDay, currentDayBox.className)
                         CurrentClickedDay = currentDay
