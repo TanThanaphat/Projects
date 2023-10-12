@@ -197,7 +197,11 @@ table{
  }
  .Month_TableData_Marked{
    border:1px solid var(--dark-main); 
-   background-color: #0068ff;
+   background-color: #653db4;
+   text-align: left;
+   padding: 2%;
+   vertical-align: top;
+
  }
 
  .OtherMonth {
