@@ -388,7 +388,7 @@ function RefreshCalendar(days, FirstDay, realmonth, christyear){
         TableBody.children[0].children[i - (mbefore_days - currentDayOrder)].className = "OtherMonth"
     }
 
-    if (realmonth == TodayDate.getMonth()){
+    if (realmonth == TodayDate.getMonth() + 1){
         CurrentMonthtdElements[TodayDate.getDate() - 1].style.backgroundColor = "#835ece"
     }
 
