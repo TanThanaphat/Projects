@@ -530,7 +530,7 @@ LoginButton.addEventListener('click', () => {
         }, 1000)
     }
 });
-const url = "http://taskmanager.ddns.net:5000/"
+const url = "http://localhost:5000/"
 async function Login(Username, Password) {
     const body = {
         "userName":Username,
